@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TriboPersonalEstudio.View.LoginView">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <Image Source="loginimagebackground.jpeg"
+                   Opacity="0.3"
+                  Aspect="Fill"/>
+            <StackLayout VerticalOptions="CenterAndExpand" Margin="10,200,10,0">
+                <Label Text="Matrícula"
+                       FontSize="20"
+                       FontFamily="MontserratBold"
+                       TextColor="White"/>
+                <Entry Margin="0,50,0,0"/>
+
+                <Label Text="Senha"
+                       FontSize="20"
+                       FontFamily="MontserratBold"
+                       TextColor="White"/>
+                <Entry Margin="0,50,0,0"/>
+                <Button Text="Login"
+                        Margin="0,40,0,0"
+                        CornerRadius="20"
+                        TextColor="White"
+                        BackgroundColor="#FC6E10"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
