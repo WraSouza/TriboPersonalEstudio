@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:TriboPersonalEstudio.View"
+             Shell.TitleColor="OrangeRed"
+             Shell.UnselectedColor="LightGray"
+             Shell.NavBarIsVisible="False"
+             Shell.BackgroundColor="White"
+             x:Class="TriboPersonalEstudio.View.ProfessorAppShell">
+
+    <TabBar>
+        <Tab Title="Início"
+             Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfessorMainView}"/>
+        </Tab>
+
+        <Tab Title="Alunos"
+             Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate views:CadastroAlunoView}"/>
+        </Tab>
+
+        <Tab Title="Agenda"
+             Icon="calendar.png">
+            <ShellContent ContentTemplate="{DataTemplate views:AgendaView}"/>
+        </Tab>
+    </TabBar>
+    
+</Shell>

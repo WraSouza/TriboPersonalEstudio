@@ -10,7 +10,7 @@ namespace TriboPersonalEstudio
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new View.LoginView();
         }
 
         protected override void OnStart()

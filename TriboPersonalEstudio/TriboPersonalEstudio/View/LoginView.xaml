@@ -1,26 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
              x:Class="TriboPersonalEstudio.View.LoginView">
+
+    <ContentPage.BindingContext>
+        <mvvm:LoginViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
             <Image Source="loginimagebackground.jpeg"
-                   Opacity="0.3"
+                   Opacity="0.6"
                   Aspect="Fill"/>
+
+            <StackLayout VerticalOptions="StartAndExpand"
+                         HorizontalOptions="Center"
+                         Margin="0,50,0,0">
+                <Image Source="triboslogo.png"/>
+            </StackLayout>
+            
             <StackLayout VerticalOptions="CenterAndExpand" Margin="10,200,10,0">
+
+               
+
                 <Label Text="Matrícula"
                        FontSize="20"
                        FontFamily="MontserratBold"
                        TextColor="White"/>
-                <Entry Margin="0,50,0,0"/>
+                <Entry Margin="0,30,0,0"
+                       Text="{Binding Nome}"
+                       TextColor="White"/>
 
                 <Label Text="Senha"
                        FontSize="20"
                        FontFamily="MontserratBold"
                        TextColor="White"/>
-                <Entry Margin="0,50,0,0"/>
+                <Entry Margin="0,30,0,0"
+                       Text="{Binding Senha}"
+                       IsPassword="True"
+                       TextColor="White"/>
                 <Button Text="Login"
-                        Margin="0,40,0,0"
+                        Command="{Binding LoginCommand}"
+                        Margin="0,100,0,0"
                         CornerRadius="20"
                         TextColor="White"
                         BackgroundColor="#FC6E10"/>

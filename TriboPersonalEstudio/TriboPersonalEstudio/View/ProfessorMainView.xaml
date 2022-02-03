@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TriboPersonalEstudio.View.ProfessorMainView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="triboslogo.png"
+                   
+                   Margin="20,20,20,0"/>
+
+            <Label Text="Treinos do Dia"
+                   Margin="20,40,0,0"
+                   FontSize="25"
+                   TextColor="OrangeRed"/>
+
+            <ScrollView Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" Spacing="0">             
+            
+            <Frame BackgroundColor="OrangeRed"
+                   Margin="20,0,20,0"
+                   WidthRequest="200"
+                   CornerRadius="5"
+                   HeightRequest="100">                
+                    <StackLayout>
+                        <Label Text="Wladimir"
+                           TextColor="White"
+                           FontSize="25"/>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Início: "
+                                     TextColor="White"/>
+                                    <Label Text="18:00 "
+                                     TextColor="White"/>
+                                </StackLayout>
+
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Fim "
+                                     TextColor="White"/>
+                                    <Label Text="19:00 "
+                                     TextColor="White"/>
+                                </StackLayout>
+                            </StackLayout>
+                            
+                        </StackLayout>                               
+            </Frame>
+
+                    <Frame BackgroundColor="OrangeRed"
+                   Margin="20,0,20,0"
+                   CornerRadius="5"
+                           WidthRequest="200"
+                   HeightRequest="100">
+                        <StackLayout>
+                            <Label Text="Fabiana"
+                           TextColor="White"
+                           FontSize="25"/>
+
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Início: "
+                                     TextColor="White"/>
+                                    <Label Text="18:00 "
+                                     TextColor="White"/>
+                                </StackLayout>
+
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Fim "
+                                     TextColor="White"/>
+                                    <Label Text="19:00 "
+                                     TextColor="White"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame BackgroundColor="OrangeRed"
+                   Margin="20,0,20,0"
+                   CornerRadius="5"
+                           WidthRequest="200"
+                   HeightRequest="100">
+                        <StackLayout>
+                            <Label Text="Maria Luiza"
+                           TextColor="White"
+                           FontSize="25"/>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Início: "
+                                     TextColor="White"/>
+                                    <Label Text="20:00 "
+                                     TextColor="White"/>
+                                </StackLayout>
+
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Fim "
+                                     TextColor="White"/>
+                                    <Label Text="20:30 "
+                                     TextColor="White"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        
+                        
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+            <Grid Margin="20,40,20,0"
+                  
+                  RowDefinitions="250"
+                  ColumnDefinitions="2*,2*">               
+
+                <Image Source="cadastroexercicioimage.jpeg"
+                       Aspect="Fill"
+                       Grid.Row="0"/>
+                <Label Text="Cadastrar Exercícios"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       HorizontalTextAlignment="Center"
+                       FontSize="16"
+                       TextColor="Black"/>
+
+                <Image Source="testeimagelogin.jpeg"
+                       Aspect="Fill"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+                <Label Text="Cadastrar Séries"
+                       Grid.Column="1"
+                       Grid.Row="1"
+                       HorizontalTextAlignment="Center"
+                       FontSize="16"
+                       TextColor="Black"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
