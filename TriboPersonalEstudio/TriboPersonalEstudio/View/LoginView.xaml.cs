@@ -14,6 +14,7 @@ namespace TriboPersonalEstudio.View
     {
         public LoginView()
         {
+            DevExpress.XamarinForms.Editors.Initializer.Init();
             InitializeComponent();
         }
     }

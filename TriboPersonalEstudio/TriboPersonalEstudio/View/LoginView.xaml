@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"             
+             xmlns:dxe="http://schemas.devexpress.com/xamarin/2014/forms/editors"
              x:Class="TriboPersonalEstudio.View.LoginView">
 
     <ContentPage.BindingContext>
@@ -10,8 +11,8 @@
     
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
-            <Image Source="loginimagebackground.jpeg"
-                   Opacity="0.6"
+            <Image Source="imagelogin.jpg"
+                   Opacity="0.5"
                   Aspect="Fill"/>
 
             <StackLayout VerticalOptions="StartAndExpand"
@@ -27,19 +28,29 @@
                 <Label Text="Matrícula"
                        FontSize="20"
                        FontFamily="MontserratBold"
-                       TextColor="White"/>
-                <Entry Margin="0,30,0,0"
+                       TextColor="OrangeRed"/>
+                <dxe:TextEdit Text="{Binding Nome}"
+                              TextColor="White"                              
+                              BorderColor="Coral"
+                              BorderThickness="1"/>
+                <!--<Entry Margin="0,30,0,0"
+                       BackgroundColor="Green"
                        Text="{Binding Nome}"
-                       TextColor="White"/>
+                       TextColor="White"/>-->
 
                 <Label Text="Senha"
                        FontSize="20"
                        FontFamily="MontserratBold"
-                       TextColor="White"/>
-                <Entry Margin="0,30,0,0"
+                       TextColor="OrangeRed"/>
+                <dxe:PasswordEdit Text="{Binding Senha}"
+                                  BorderColor="Coral"
+                                  BorderThickness="1"
+                                  TextColor="White"/>
+
+                <!--<Entry Margin="0,30,0,0"
                        Text="{Binding Senha}"
                        IsPassword="True"
-                       TextColor="White"/>
+                       TextColor="White"/>-->
                 <Button Text="Login"
                         Command="{Binding LoginCommand}"
                         Margin="0,100,0,0"

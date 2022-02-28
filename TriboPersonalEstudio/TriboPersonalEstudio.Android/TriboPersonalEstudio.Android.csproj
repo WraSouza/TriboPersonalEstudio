@@ -54,6 +54,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DevExpress.XamarinForms.Editors">
+      <Version>21.2.5</Version>
+    </PackageReference>
     <PackageReference Include="FirebaseDatabase.net">
       <Version>4.0.7</Version>
     </PackageReference>
@@ -179,6 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\testeimagelogin.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\imagelogin.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

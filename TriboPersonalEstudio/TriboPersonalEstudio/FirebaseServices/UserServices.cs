@@ -1,4 +1,5 @@
 ﻿using Firebase.Database;
+using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace TriboPersonalEstudio.FirebaseServices
         {
             var user = (await firebase.Child("Usuario")
                 .OnceAsync<Usuario>())
-                .Where(u => u.Object.NomeAcesso == name)
+                .Where(u => u.Object.NomeUsuario == name)
                 .Where(u => u.Object.SenhaAluno == passwd)
                 .FirstOrDefault();
 
@@ -33,17 +34,50 @@ namespace TriboPersonalEstudio.FirebaseServices
         {
             var user = (await firebase.Child("Usuario")
                .OnceAsync<Usuario>())
-               .Where(u => u.Object.NomeAcesso == name)
+               .Where(u => u.Object.NomeUsuario == name)
                .FirstOrDefault();
 
             return user.Object.IsAtivo;
+        }
+
+        public async Task<bool> IsUSerExists(string nomeUsuario)
+        {
+            var user = (await firebase.Child("Usuario")
+                .OnceAsync<Usuario>())
+                .Where(u => u.Object.NomeUsuario == nomeUsuario)
+                .FirstOrDefault();
+
+            return (user != null);
+        }
+
+        public async Task<bool> CadastraAluno(Usuario usuario)
+        {
+            if(await IsUSerExists(usuario.NomeUsuario) == false)
+            {
+                await firebase.Child("Usuario")
+                    .PostAsync(new Usuario()
+                    {
+                        NomeUsuario = usuario.NomeUsuario,
+                        NomeAluno = usuario.NomeAluno,
+                        NomeCurto = usuario.NomeCurto,
+                        SenhaAluno = usuario.SenhaAluno,
+                        IsAtivo = usuario.IsAtivo,
+                        IsProfessor = usuario.IsProfessor
+                    });
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<bool> GetUserProfile(string name)
         {
             var user = (await firebase.Child("Usuario")
                .OnceAsync<Usuario>())
-               .Where(u => u.Object.NomeAcesso == name)
+               .Where(u => u.Object.NomeUsuario == name)
                .FirstOrDefault();
 
             return user.Object.IsProfessor;
@@ -53,7 +87,7 @@ namespace TriboPersonalEstudio.FirebaseServices
         {
             var user = (await firebase.Child("Usuario")
                .OnceAsync<Usuario>())
-               .Where(u => u.Object.NomeAcesso == name)
+               .Where(u => u.Object.NomeUsuario == name)
                .FirstOrDefault();
 
             return user.Object.SenhaAluno;
