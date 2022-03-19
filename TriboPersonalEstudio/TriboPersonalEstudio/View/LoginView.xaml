@@ -12,7 +12,7 @@
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
             <Image Source="imagelogin.jpg"
-                   Opacity="0.5"
+                   Opacity="0.7"
                   Aspect="Fill"/>
 
             <StackLayout VerticalOptions="StartAndExpand"
@@ -33,10 +33,9 @@
                               TextColor="White"                              
                               BorderColor="Coral"
                               BorderThickness="1"/>
-                <!--<Entry Margin="0,30,0,0"
-                       BackgroundColor="Green"
+                <Entry Margin="0,30,0,0"                       
                        Text="{Binding Nome}"
-                       TextColor="White"/>-->
+                       TextColor="White"/>
 
                 <Label Text="Senha"
                        FontSize="20"

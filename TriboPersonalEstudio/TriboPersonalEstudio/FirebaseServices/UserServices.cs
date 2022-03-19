@@ -51,7 +51,7 @@ namespace TriboPersonalEstudio.FirebaseServices
         }
 
         public async Task<bool> CadastraAluno(Usuario usuario)
-        {
+        {         
             if(await IsUSerExists(usuario.NomeUsuario) == false)
             {
                 await firebase.Child("Usuario")
@@ -59,10 +59,13 @@ namespace TriboPersonalEstudio.FirebaseServices
                     {
                         NomeUsuario = usuario.NomeUsuario,
                         NomeAluno = usuario.NomeAluno,
-                        NomeCurto = usuario.NomeCurto,
                         SenhaAluno = usuario.SenhaAluno,
                         IsAtivo = usuario.IsAtivo,
-                        IsProfessor = usuario.IsProfessor
+                        IsProfessor = usuario.IsProfessor,
+                        QtdeVezesSemana = usuario.QtdeVezesSemana,
+                        PeriodoContrato = usuario.PeriodoContrato,
+                        TipoPlano = usuario.TipoPlano,
+                        CreatedAt = usuario.CreatedAt
                     });
 
                 return true;
@@ -71,6 +74,8 @@ namespace TriboPersonalEstudio.FirebaseServices
             {
                 return false;
             }
+                
+           
         }
 
         public async Task<bool> GetUserProfile(string name)

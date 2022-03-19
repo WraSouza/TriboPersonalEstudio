@@ -1,128 +1,144 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
-             x:Class="TriboPersonalEstudio.View.CadastroAlunoView">
+<ContentPage
+    x:Class="TriboPersonalEstudio.View.CadastroAlunoView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+    xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
 
     <ContentPage.BindingContext>
-        <mvvm:CadastroAlunoViewModel/>
+        <mvvm:CadastroAlunoViewModel />
     </ContentPage.BindingContext>
-    
+
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
-                <Image Source="triboslogo.jpg"/>
+                <Image Source="triboslogo.jpg" />
             </StackLayout>
 
             <StackLayout Margin="20,0,20,0">
-                
-                <Label Text="Nome do Aluno"
-                       FontSize="20"
-                       TextColor="OrangeRed"/>
 
-                <Entry/>                
+                <Label
+                    FontSize="20"
+                    Text="Nome do Aluno"
+                    TextColor="OrangeRed" />
 
-                <Label Text="Nome de Usuário"
-                       FontSize="20"
-                       TextColor="OrangeRed"
-                       Margin="0,20,0,0"/>
+                <Entry Text="{Binding NomeAluno}" />
 
-                <Entry/>
+                <Label
+                    Margin="0,20,0,0"
+                    FontSize="20"
+                    Text="Nome de Usuário"
+                    TextColor="OrangeRed" />
+
+                <Entry Text="{Binding NomeUsuario}" />
             </StackLayout>
 
             <Grid Margin="20,0,20,0" ColumnDefinitions="2*,2*">
-                <StackLayout>
-                    <Label Text="Planos"
-                           FontSize="20"
-                           TextColor="OrangeRed"/>
+                <StackLayout Grid.Row="0" Grid.Column="0">
+                    <Label
+                        FontSize="20"
+                        Text="Planos"
+                        TextColor="OrangeRed" />
 
                     <Frame>
-                        <StackLayout>
+                        <StackLayout RadioButtonGroup.GroupName="Plano" RadioButtonGroup.SelectedValue="{Binding PlanoButton}">
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="Individual"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
+                                <RadioButton
+                                    Content="Individual"
+                                    TextColor="OrangeRed"
+                                    Value="Individual" />
+
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="Trio"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
-                            </StackLayout>
-                        </StackLayout>                        
-                    </Frame>
-                </StackLayout>
+                                <RadioButton
+                                    Content="Trio"
+                                    TextColor="OrangeRed"
+                                    Value="Trio" />
 
-                <!--Período-->
-                <StackLayout Grid.Column="1">
-                    <Label Text="Período"
-                           FontSize="20"
-                           TextColor="OrangeRed"/>
-
-                    <Frame>
-                        <StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="2x"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
-                            </StackLayout>
-
-                            <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="3x"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                
+
+                <!--  Período  -->
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <Label
+                        FontSize="20"
+                        Text="Período"
+                        TextColor="OrangeRed" />
+
+                    <Frame>
+                        <StackLayout RadioButtonGroup.GroupName="Periodo" RadioButtonGroup.SelectedValue="{Binding QtdeVezesPorSemana}">
+                            <StackLayout Orientation="Horizontal">
+                                <RadioButton
+                                    Content="2x"
+                                    TextColor="OrangeRed"
+                                    Value="2x" />
+
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <RadioButton
+                                    Content="3x"
+                                    TextColor="OrangeRed"
+                                    Value="3x" />
+
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
             </Grid>
-            
-            <!--Validade-->
+
+            <!--  Validade  -->
             <Grid Margin="20,0,20,0" ColumnDefinitions="2*,2*">
                 <StackLayout>
-                    <Label Text="Validade"
-                           FontSize="20"
-                           TextColor="OrangeRed"/>
+                    <Label
+                        FontSize="20"
+                        Text="Validade"
+                        TextColor="OrangeRed" />
 
                     <Frame>
-                        <StackLayout>
+                        <StackLayout RadioButtonGroup.GroupName="Prazo" RadioButtonGroup.SelectedValue="{Binding PrazoButton}">
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="Mensal"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
+                                <RadioButton
+                                    Content="Mensal"
+                                    TextColor="OrangeRed"
+                                    Value="Mensal" />
+
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="Trimestral"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
+                                <RadioButton
+                                    Content="Trimestral"
+                                    TextColor="OrangeRed"
+                                    Value="Trimestral" />
+
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal">
-                                <RadioButton />
-                                <Label Text="Semestral"
-                                       TextColor="OrangeRed"
-                                       FontSize="20"/>
+                                <RadioButton
+                                    Content="Semestral"
+                                    TextColor="OrangeRed"
+                                    Value="Semestral" />
+
                             </StackLayout>
                         </StackLayout>
                     </Frame>
-                </StackLayout>               
+                </StackLayout>
 
             </Grid>
 
             <StackLayout>
-                <Button Text="Cadastrar"
-                        TextColor="White"
-                        Margin="20,20,20,0"
-                        CornerRadius="10"
-                        BackgroundColor="OrangeRed"/>
+                <Button
+                    Margin="20,20,20,0"
+                    BackgroundColor="OrangeRed"
+                    Command="{Binding CadastraAluno}"
+                    CornerRadius="10"
+                    Text="Cadastrar"
+                    TextColor="White" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

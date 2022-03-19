@@ -17,10 +17,6 @@ namespace TriboPersonalEstudio.View
             InitializeComponent();
             
         }
-
-        protected async override void OnAppearing()
-        {
-            
-        }
+        
     }
 }

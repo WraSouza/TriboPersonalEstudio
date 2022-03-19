@@ -14,18 +14,40 @@ namespace TriboPersonalEstudio.ViewModel
         private string _nomeAluno;
         private string _nomeUsuario;
         const string senhaPadrao = "1234";
-        private string _tipoPlano;
+        private object _rdButtonVezesPorSemana;
         const bool isProfessor = false;
         const bool isAtivo = true;
+        private object _rdButtonPlano;
+        private object _rdButtonPrazo;
 
         public Command CadastraAluno { get; set; }
 
-        public string TipoPlano
+        public object PlanoButton
         {
-            get => _tipoPlano;
+            get => _rdButtonPlano;
             set
             {
-                _tipoPlano = value.ToLower();
+                _rdButtonPlano = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public object PrazoButton
+        {
+            get => _rdButtonPrazo;
+            set
+            {
+                _rdButtonPrazo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public object QtdeVezesPorSemana
+        {
+            get => _rdButtonVezesPorSemana;
+            set
+            {
+                _rdButtonVezesPorSemana = value;
                 OnPropertyChanged();
             }
         }
@@ -35,7 +57,7 @@ namespace TriboPersonalEstudio.ViewModel
             get => _nomeAluno;
             set
             {
-                _nomeAluno = value.ToLower();
+                _nomeAluno = value;
                 OnPropertyChanged();
             }
         }
@@ -45,7 +67,7 @@ namespace TriboPersonalEstudio.ViewModel
             get => _nomeUsuario;
             set
             {
-                _nomeUsuario = value;
+                _nomeUsuario = value.ToLower();
                 OnPropertyChanged();
             }
         }
@@ -68,16 +90,32 @@ namespace TriboPersonalEstudio.ViewModel
                     }
                     else
                     {
+                        var tipoPlano = PlanoButton;
                         var userService = new UserServices();
                         var novoUsuario = new Usuario() {
                             NomeAluno = NomeAluno,
                             IsAtivo = isAtivo,
                             CreatedAt = DateTime.Now,
-                            
+                            IsProfessor = isProfessor,
+                            QtdeVezesSemana = QtdeVezesPorSemana,
+                            PeriodoContrato = PrazoButton,
+                            SenhaAluno = senhaPadrao,
+                            NomeUsuario = NomeUsuario,
+                            TipoPlano = PlanoButton                            
                         };
-                        
 
-                        //bool verificaLogin = userService.LoginUser(N)
+
+                        bool confirmaCadastro = await userService.CadastraAluno(novoUsuario);
+
+                        if (confirmaCadastro)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Sucesso", "Usuário Cadastrado Com Sucesso", "OK");
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Info", "Usuário Já Cadastrado No Sistema", "OK");
+                        }
+                        
                     }
                 }
                 else
