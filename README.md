@@ -14,6 +14,9 @@ data de inscrição, validade do contrato.
 <table>
   <tr>
     <td>
+      C#
+    </td>
+    <td>
       Xamarin Forms
     </td>
     <td>
