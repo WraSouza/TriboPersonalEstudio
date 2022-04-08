@@ -11,9 +11,11 @@ namespace TriboPersonalEstudio.Model
         public string SenhaAluno { get; set; }
         public bool IsProfessor { get; set; }
         public bool IsAtivo { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
+        public string VencimentoEm { get; set; }
         public object TipoPlano { get; set; }
         public object QtdeVezesSemana { get; set; }
         public object PeriodoContrato { get; set; }
+        public string ValorMensalidade { get; set; }
     }
 }

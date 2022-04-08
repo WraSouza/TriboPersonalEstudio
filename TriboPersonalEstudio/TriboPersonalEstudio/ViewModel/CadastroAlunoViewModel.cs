@@ -19,8 +19,22 @@ namespace TriboPersonalEstudio.ViewModel
         const bool isAtivo = true;
         private object _rdButtonPlano;
         private object _rdButtonPrazo;
+        private DateTime VencimentoEm;
+        private string _valorMensalidade;
+        private string Mensal = "Mensal";
+        private string Trimestral = "Trimestral";        
 
         public Command CadastraAluno { get; set; }
+
+        public string ValorMensalidade
+        {
+            get => _valorMensalidade;
+            set
+            {
+                _valorMensalidade = value;
+                OnPropertyChanged();
+            }
+        }
 
         public object PlanoButton
         {
@@ -80,6 +94,7 @@ namespace TriboPersonalEstudio.ViewModel
         private async Task CadastrarAluno()
         {
             bool verificaConexao = Conectividade.VerificaConectividade();
+
             try
             {
                 if (verificaConexao)
@@ -91,17 +106,34 @@ namespace TriboPersonalEstudio.ViewModel
                     else
                     {
                         var tipoPlano = PlanoButton;
-                        var userService = new UserServices();
+                        var userService = new UserServices();                     
+
+                        if(PrazoButton.ToString() == Mensal)
+                        {
+                            VencimentoEm = DateTime.Now.AddDays(30);
+                                 
+                        }else if (PrazoButton.ToString() == Trimestral)
+                        {
+                            VencimentoEm = DateTime.Now.AddDays(90);
+                        }
+                        else
+                        {
+                            VencimentoEm = DateTime.Now.AddDays(180);
+                        }
+                        
                         var novoUsuario = new Usuario() {
                             NomeAluno = NomeAluno,
                             IsAtivo = isAtivo,
-                            CreatedAt = DateTime.Now,
+                            CreatedAt = DateTime.Now.ToString("dd-MM-yyyy"),
                             IsProfessor = isProfessor,
                             QtdeVezesSemana = QtdeVezesPorSemana,
                             PeriodoContrato = PrazoButton,
                             SenhaAluno = senhaPadrao,
                             NomeUsuario = NomeUsuario,
-                            TipoPlano = PlanoButton                            
+                            TipoPlano = PlanoButton,
+                            VencimentoEm = VencimentoEm.Date.ToString("dd-MM-yyyy"),
+                            ValorMensalidade = ValorMensalidade
+                            
                         };
 
 
@@ -110,6 +142,7 @@ namespace TriboPersonalEstudio.ViewModel
                         if (confirmaCadastro)
                         {
                             await Application.Current.MainPage.DisplayAlert("Sucesso", "Usuário Cadastrado Com Sucesso", "OK");
+                            
                         }
                         else
                         {

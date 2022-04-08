@@ -65,16 +65,17 @@ namespace TriboPersonalEstudio.FirebaseServices
                         QtdeVezesSemana = usuario.QtdeVezesSemana,
                         PeriodoContrato = usuario.PeriodoContrato,
                         TipoPlano = usuario.TipoPlano,
-                        CreatedAt = usuario.CreatedAt
-                    });
+                        CreatedAt = usuario.CreatedAt,
+                        VencimentoEm = usuario.VencimentoEm,
+                        ValorMensalidade = usuario.ValorMensalidade
+                    });                
 
                 return true;
             }
             else
             {
                 return false;
-            }
-                
+            }                
            
         }
 
@@ -96,6 +97,31 @@ namespace TriboPersonalEstudio.FirebaseServices
                .FirstOrDefault();
 
             return user.Object.SenhaAluno;
+        }
+
+        public async Task<List<Usuario>> RetornaUsuarios()
+        {
+            return (await firebase.Child("Usuario")
+                .OnceAsync<Usuario>()).Select(item => new Usuario
+                {
+                    NomeAluno = item.Object.NomeAluno,                    
+                    IsProfessor = item.Object.IsProfessor,
+                    TipoPlano = item.Object.TipoPlano,
+                    VencimentoEm = item.Object.VencimentoEm,
+                    ValorMensalidade = item.Object.ValorMensalidade,
+                    PeriodoContrato = item.Object.PeriodoContrato
+                    
+                }).ToList();
+        }
+
+        public async Task<List<Usuario>> RetornaAlunos()
+        {
+            var alunos = await RetornaUsuarios();
+            await firebase
+                .Child("Usuario")
+                .OnceAsync<Usuario>();
+
+            return alunos.Where(a => a.IsProfessor == false).ToList();
         }
     }
 }

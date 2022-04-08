@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TriboPersonalEstudio.View.AlunosView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel">
+    <ContentPage.BindingContext>
+        <mvvm:CadastroAlunoViewModel />
+    </ContentPage.BindingContext>
+
+    <CollectionView x:Name="collectionView" Margin="2,5,2,0">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout
+                HorizontalItemSpacing="2"
+                Orientation="Vertical"
+                Span="2"
+                VerticalItemSpacing="5" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Frame BorderColor="Black"
+                           BackgroundColor="#F5F5F5"
+                           CornerRadius="10">
+                        <StackLayout>
+                            <Label Text="{Binding NomeAluno}"
+                                   FontFamily="MontserratBold"
+                                   TextColor="Black" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Plano: " 
+                                       FontFamily="MontserratRegular"/>
+                                <Label Text="{Binding TipoPlano}"
+                                       FontFamily="MontserratRegular"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Contrato: "
+                                       FontFamily="MontserratRegular"/>
+                                <Label Text="{Binding PeriodoContrato}"
+                                       FontFamily="MontserratRegular"/>
+                            </StackLayout>
+
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Vence Em: "
+                                       FontSize="13"
+                                       FontFamily="MontserratRegular"/>
+                                <Label Text="{Binding VencimentoEm}"
+                                       FontSize="13"
+                                       FontFamily="MontserratRegular"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+        <CollectionView.EmptyView>
+            <ContentView>
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label
+                        FontSize="15"
+                        Text="Nenhum Aluno Cadastrado No Momento"
+                        FontFamily="MontserratBold"
+                        TextColor="Black" />
+                </StackLayout>
+            </ContentView>
+        </CollectionView.EmptyView>
+
+    </CollectionView>
+</ContentPage>

@@ -4,6 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+    Shell.ForegroundColor="Black"
+    Title="Cadastro"
     xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
 
     <ContentPage.BindingContext>
@@ -11,7 +13,9 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout>
+            
             <StackLayout>
                 <Image Source="triboslogo.jpg" />
             </StackLayout>
@@ -26,15 +30,32 @@
                 <Entry Text="{Binding NomeAluno}" />
 
                 <Label
-                    Margin="0,20,0,0"
+                    Margin="0,15,0,0"
                     FontSize="20"
                     Text="Nome de Usuário"
                     TextColor="OrangeRed" />
 
                 <Entry Text="{Binding NomeUsuario}" />
-            </StackLayout>
 
-            <Grid Margin="20,0,20,0" ColumnDefinitions="2*,2*">
+                    <Label
+                    Margin="0,20,0,0"
+                    FontSize="20"
+                    Text="Valor da Mensalidade"
+                    TextColor="OrangeRed" />
+
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="R$"
+                               VerticalOptions="Center"
+                               TextColor="OrangeRed"
+                               FontSize="15"/>
+                        
+                        <Entry Keyboard="Numeric"                               
+                               Text="{Binding ValorMensalidade}"
+                               HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>                    
+                </StackLayout>               
+
+                <Grid Margin="20,20,20,0" ColumnDefinitions="2*,2*" RowDefinitions="2*,2*">
                 <StackLayout Grid.Row="0" Grid.Column="0">
                     <Label
                         FontSize="20"
@@ -89,12 +110,9 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-
-            </Grid>
-
-            <!--  Validade  -->
-            <Grid Margin="20,0,20,0" ColumnDefinitions="2*,2*">
-                <StackLayout>
+                
+                <!--Validade-->
+                <StackLayout Grid.Row="1" Grid.Column="0">
                     <Label
                         FontSize="20"
                         Text="Validade"
@@ -127,9 +145,11 @@
                             </StackLayout>
                         </StackLayout>
                     </Frame>
-                </StackLayout>
+                </StackLayout>     
+                
+                 
 
-            </Grid>
+            </Grid>            
 
             <StackLayout>
                 <Button
@@ -140,6 +160,8 @@
                     Text="Cadastrar"
                     TextColor="White" />
             </StackLayout>
+           
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
