@@ -83,7 +83,7 @@ namespace TriboPersonalEstudio.ViewModel
 
                     if (Result)
                     {
-                        //Preferences.Set("Nome", Nome.ToUpper());                        
+                        Preferences.Set("Nome", Nome.ToUpper());                        
 
                         bool status = await userService.GetUserStatus(Nome);
 

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="TriboPersonalEstudio.View.FinancasView">
+    <ContentPage.Content>
+        <ScrollView>
+            
+        
+        <StackLayout>
+            <Label x:Name="lblMesAtual"
+                   FontFamily="MontserratMedium"
+                   FontSize="20"
+                   Margin="20,20,0,0"/>
+
+            <StackLayout Orientation="Horizontal" Padding="0">
+
+                <Label Text="R$"
+                       FontSize="30"
+                       TextColor="Black"
+                       Margin="20,0,0,0"/>
+
+                <Label
+                x:Name="lblValor"
+                FontFamily="MontserratBold"
+                Margin="20,0,0,0"
+                FontSize="30"
+                TextColor="Black" />
+            </StackLayout>
+
+                <Label Text="Previsto"
+                       FontSize="30"
+                       Margin="20,0,0,0"/>
+
+                <forms:ChartView
+                Margin="0,10,0,0"
+                x:Name="grafico"  
+                VerticalOptions="CenterAndExpand"
+                HeightRequest="500" />
+
+                <Label Text="Mensalidades do Mês Atual"
+                       FontSize="20"
+                       Margin="20,0,0,0"
+                       FontFamily="MontserratBold"
+                       TextColor="OrangeRed"/>
+
+                <CollectionView x:Name="collectionView" Margin="20,0,20,0">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                HorizontalItemSpacing="2"
+                Orientation="Vertical"
+                Span="2"
+                VerticalItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame BorderColor="Black"
+                                       BackgroundColor="LightGray"
+                                       CornerRadius="10">
+                                    <StackLayout>
+                                        <Label Text="{Binding NomeAluno}"
+                                               FontFamily="MontserratBold"
+                                               TextColor="Black" />
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Pago"/>
+                                            <Switch IsToggled="False"/>
+                                        </StackLayout>
+                                        
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </StackLayout>           
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

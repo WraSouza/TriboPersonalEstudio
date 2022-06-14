@@ -22,6 +22,10 @@
         <Tab Title="Agenda" Icon="calendar.png">
             <ShellContent ContentTemplate="{DataTemplate views:AgendaView}" />
         </Tab>
+
+        <Tab Title="Finanças" Icon="financas.png">
+            <ShellContent ContentTemplate="{DataTemplate views:FinancasView}" />
+        </Tab>
     </TabBar>
 
 </Shell>

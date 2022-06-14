@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TriboPersonalEstudio.FirebaseServices;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,5 +23,6 @@ namespace TriboPersonalEstudio.View
             UserServices usuarios = new UserServices();
             collectionView.ItemsSource = await usuarios.RetornaAlunos();
         }
+       
     }
 }

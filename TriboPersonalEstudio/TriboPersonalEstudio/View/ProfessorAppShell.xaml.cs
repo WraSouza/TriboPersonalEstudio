@@ -15,6 +15,8 @@ namespace TriboPersonalEstudio.View
         public ProfessorAppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(AlunoDetailView), typeof(AlunoDetailView));
         }
     }
 }

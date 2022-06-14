@@ -10,10 +10,7 @@
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <Grid BackgroundColor="#323232">
-            <Image Source="imagelogin.jpg"
-                   Aspect="Fill"
-                   Opacity="0.2"/>
+        <Grid>            
 
             <StackLayout VerticalOptions="StartAndExpand"
                          HorizontalOptions="Center"
@@ -28,10 +25,9 @@
                        FontSize="20"
                        FontFamily="MontserratBold"
                        TextColor="OrangeRed"/>
-                <dxe:TextEdit Text="{Binding Nome}"
-                              TextColor="White"                              
+                <dxe:TextEdit Text="{Binding Nome}"                                                            
                               BorderColor="Coral"
-                              IconColor="White"
+                              IconColor="Black"
                               BorderThickness="1"/>             
 
                 <Label Text="Senha"
@@ -42,13 +38,12 @@
                 <dxe:PasswordEdit Text="{Binding Senha}"
                                   BorderColor="Coral"
                                   BorderThickness="1"
-                                  IconColor="White"
-                                  TextColor="White"/>
+                                  IconColor="Black"/>
                 
                 <Button Text="Login"
                         Command="{Binding LoginCommand}"
-                        Margin="0,150,0,0"
-                        CornerRadius="20"
+                        Margin="20,150,20,0"
+                        CornerRadius="10"
                         TextColor="White"
                         BackgroundColor="#FC6E10"/>
             </StackLayout>

@@ -2,13 +2,13 @@
 <ContentPage
     x:Class="TriboPersonalEstudio.View.AlunosView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel">
     <ContentPage.BindingContext>
-        <mvvm:CadastroAlunoViewModel />
+        <mvvm:AlunosViewModel />
     </ContentPage.BindingContext>
 
-    <CollectionView x:Name="collectionView" Margin="2,5,2,0">
+    <CollectionView x:Name="collectionView" Margin="2,5,2,0" SelectionMode="Single" SelectionChangedCommand="{Binding IrParaAlunoDetailView}">
         <CollectionView.ItemsLayout>
             <GridItemsLayout
                 HorizontalItemSpacing="2"
@@ -23,8 +23,13 @@
                     <Frame BorderColor="Black"
                            BackgroundColor="#F5F5F5"
                            CornerRadius="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.IrParaAlunoDetailView, Source={x:Reference collectionView}}"
+                                                  CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
                         <StackLayout>
                             <Label Text="{Binding NomeAluno}"
+                                   x:Name="lblNomeAluno"
                                    FontFamily="MontserratBold"
                                    TextColor="Black" />
                             <StackLayout Orientation="Horizontal">
@@ -49,8 +54,11 @@
                                 <Label Text="{Binding VencimentoEm}"
                                        FontSize="13"
                                        FontFamily="MontserratRegular"/>
-                            </StackLayout>
+                            </StackLayout>                          
+                            
                         </StackLayout>
+
+                        
                     </Frame>
                 </StackLayout>
             </DataTemplate>

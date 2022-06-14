@@ -114,6 +114,33 @@ namespace TriboPersonalEstudio.FirebaseServices
                 }).ToList();
         }
 
+        public async Task<bool> DesativarUsuario(string name)
+        {
+            var alunos = await RetornaUsuarios();
+            var toUpdatePerson = (await firebase
+              .Child("Usuario")
+              .OnceAsync<Usuario>()).Where(a => a.Object.NomeAluno == name).FirstOrDefault();
+
+            toUpdatePerson.Object.IsAtivo = false;
+
+            await firebase
+           .Child("Usuario")           
+           .Child(toUpdatePerson.Key)
+           .PutAsync(toUpdatePerson.Object);
+
+            return true;
+        }
+
+        public async Task<List<Usuario>> RetornaAlunoEspecifico(string name)
+        {
+            var alunos = await RetornaUsuarios();
+            await firebase
+                .Child("Usuario")
+                .OnceAsync<Usuario>();
+
+            return alunos.Where(a => a.NomeAluno == name).ToList();
+        }
+
         public async Task<List<Usuario>> RetornaAlunos()
         {
             var alunos = await RetornaUsuarios();
