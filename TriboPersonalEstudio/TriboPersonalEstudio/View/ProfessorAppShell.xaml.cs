@@ -17,6 +17,7 @@ namespace TriboPersonalEstudio.View
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(AlunoDetailView), typeof(AlunoDetailView));
+            Routing.RegisterRoute(nameof(CadastroAlunoView), typeof(CadastroAlunoView));
         }
     }
 }

@@ -14,8 +14,7 @@
             <ShellContent ContentTemplate="{DataTemplate views:ProfessorMainView}" />
         </Tab>
 
-        <Tab Title="Alunos" Icon="user.png">
-            <ShellContent Title="Cadastro" ContentTemplate="{DataTemplate views:CadastroAlunoView}" />
+        <Tab Title="Alunos" Icon="user.png">            
             <ShellContent Title="Lista de Alunos" ContentTemplate="{DataTemplate views:AlunosView}" />
         </Tab>
 

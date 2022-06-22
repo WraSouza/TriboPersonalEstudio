@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Plugin.Media;
+using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -6,6 +8,9 @@ using TriboPersonalEstudio.FirebaseServices;
 using TriboPersonalEstudio.Model;
 using TriboPersonalEstudio.Services;
 using Xamarin.Forms;
+using System.Diagnostics;
+using Plugin.Media.Abstractions;
+using Firebase.Storage;
 
 namespace TriboPersonalEstudio.ViewModel
 {
@@ -20,11 +25,33 @@ namespace TriboPersonalEstudio.ViewModel
         private object _rdButtonPlano;
         private object _rdButtonPrazo;
         private DateTime VencimentoEm;
+        private DateTime _createdAt;
         private string _valorMensalidade;
-        private string Mensal = "Mensal";
-        private string Trimestral = "Trimestral";        
+        private readonly string Mensal = "Mensal";
+        private readonly string Trimestral = "Trimestral";
+        private ImageSource _caminhoImagem;
+        private Image image;
+        MediaFile file;
 
         public Command CadastraAluno { get; set; }
+        public Command SelecionarImagem { get; set; }
+
+        public ImageSource CaminhoImagem
+        {
+            get { return _caminhoImagem;
+                    }
+            set { _caminhoImagem = value; OnPropertyChanged(); }
+        }
+
+        public DateTime CreatedAt
+        {
+            get => _createdAt;
+            set
+            {
+                _createdAt = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string ValorMensalidade
         {
@@ -89,6 +116,44 @@ namespace TriboPersonalEstudio.ViewModel
         public CadastroAlunoViewModel()
         {
             CadastraAluno = new Command(async () => await CadastrarAluno());
+            SelecionarImagem = new Command(async () => await SelecionarImagemGaleria());
+        }
+
+        private async Task SelecionarImagemGaleria()
+        {
+            await CrossMedia.Current.Initialize();
+            try
+            {
+                file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                {
+                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
+                });
+                if (file == null)
+                    return;
+                CaminhoImagem = ImageSource.FromStream(() => file.GetStream());
+                //await StoreImages(file.GetStream());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private async Task<string> StoreImages(Stream imageStream)
+        {
+            string nomeAluno = "imagemPerfil";
+            string imgurl = null;
+            string storageImage = null;
+            if (nomeAluno != null)
+            {
+                storageImage = await new FirebaseStorage("tribopersonalacademia.appspot.com")
+              .Child("Fotos")
+              .Child(nomeAluno + ".jpg")
+              .PutAsync(imageStream);
+                imgurl = storageImage;
+
+            }
+            return imgurl;
         }
 
         private async Task CadastrarAluno()
@@ -99,41 +164,51 @@ namespace TriboPersonalEstudio.ViewModel
             {
                 if (verificaConexao)
                 {
-                    if (string.IsNullOrEmpty(NomeAluno) || string.IsNullOrEmpty(NomeUsuario))
+                    if (string.IsNullOrEmpty(NomeAluno))
                     {
                         await Application.Current.MainPage.DisplayAlert("Erro", "Os Campos São Obrigatórios", "OK");
                     }
                     else
                     {
                         var tipoPlano = PlanoButton;
-                        var userService = new UserServices();                     
+                        var userService = new UserServices();
 
-                        if(PrazoButton.ToString() == Mensal)
+                        if (PrazoButton.ToString() == Mensal)
                         {
-                            VencimentoEm = DateTime.Now.AddDays(30);
-                                 
-                        }else if (PrazoButton.ToString() == Trimestral)
+                            VencimentoEm = CreatedAt.AddDays(30);
+
+                        }
+                        else if (PrazoButton.ToString() == Trimestral)
                         {
-                            VencimentoEm = DateTime.Now.AddDays(90);
+                            VencimentoEm = CreatedAt.AddDays(90);
                         }
                         else
                         {
-                            VencimentoEm = DateTime.Now.AddDays(180);
+                            VencimentoEm = CreatedAt.AddDays(180);
+
                         }
-                        
-                        var novoUsuario = new Usuario() {
+
+                        var imagemURL = await StoreImages(file.GetStream());
+
+                        string referenciaImagem = imagemURL.ToString();
+
+                        var qtdeAlunos = userService.RetornaAlunos();
+
+                        var novoUsuario = new Usuario()
+                        {
                             NomeAluno = NomeAluno,
+                            NomeUsuario = NomeUsuario,
                             IsAtivo = isAtivo,
-                            CreatedAt = DateTime.Now.ToString("dd-MM-yyyy"),
+                            CreatedAt = CreatedAt.Date.ToShortDateString(),
                             IsProfessor = isProfessor,
                             QtdeVezesSemana = QtdeVezesPorSemana,
                             PeriodoContrato = PrazoButton,
                             SenhaAluno = senhaPadrao,
-                            NomeUsuario = NomeUsuario,
                             TipoPlano = PlanoButton,
-                            VencimentoEm = VencimentoEm.Date.ToString("dd-MM-yyyy"),
-                            ValorMensalidade = ValorMensalidade
-                            
+                            VencimentoEm = VencimentoEm.Date.ToShortDateString(),
+                            ValorMensalidade = ValorMensalidade,
+                            CaminhoImagem = referenciaImagem
+
                         };
 
 
@@ -142,13 +217,13 @@ namespace TriboPersonalEstudio.ViewModel
                         if (confirmaCadastro)
                         {
                             await Application.Current.MainPage.DisplayAlert("Sucesso", "Usuário Cadastrado Com Sucesso", "OK");
-                            
+
                         }
                         else
                         {
                             await Application.Current.MainPage.DisplayAlert("Info", "Usuário Já Cadastrado No Sistema", "OK");
                         }
-                        
+
                     }
                 }
                 else
@@ -156,7 +231,8 @@ namespace TriboPersonalEstudio.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Erro", "Não Foi Possível Verificar Credenciais. Verifique Sua Conexão de Internet.", "OK");
                 }
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }

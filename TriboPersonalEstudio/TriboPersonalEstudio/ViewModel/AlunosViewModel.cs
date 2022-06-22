@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TriboPersonalEstudio.Controls;
 using TriboPersonalEstudio.FirebaseServices;
 using TriboPersonalEstudio.Model;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace TriboPersonalEstudio.ViewModel
-{
-    internal class AlunosViewModel : BaseViewModel
+{  
+    public class AlunosViewModel : BaseViewModel
     {
-        UserServices userServices = new UserServices();
+        UserServices userServices = new UserServices();        
 
         private string _textoBotao;       
 
         public Command IrParaAlunoDetailView { get; set; }
+        public Command IrParaCadastroAlunoView { get; set; }
        
 
         public string TextoBotao
@@ -35,10 +38,17 @@ namespace TriboPersonalEstudio.ViewModel
 
         public AlunosViewModel()
         {            
-            IrParaAlunoDetailView = new Command<Usuario>((model) => AbrirAlunoDetailView(model)); 
-
-        }    
+            IrParaAlunoDetailView = new Command<Usuario>((model) => AbrirAlunoDetailView(model));
+            IrParaCadastroAlunoView = new Command( async () => await AbrirCadastroAlunoView());
+        }   
         
+        private async Task AbrirCadastroAlunoView()
+        {
+            var route = $"{nameof(View.CadastroAlunoView)}";
+            await Shell.Current.GoToAsync(route);
+        }
+
+
         private async void AbrirAlunoDetailView()
         {
            

@@ -1,60 +1,163 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TriboPersonalEstudio.View.AlunoDetailView">
-    
-    <CollectionView x:Name="collectionView"
-                    Margin="10,25,10,0"
-                    EmptyView="Nenhum Aluno Cadastrado No Momento"
-                    SelectionMode="Single">    
+<ContentPage
+    x:Class="TriboPersonalEstudio.View.AlunoDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Alterar Cadastro">
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>                                          
-                        <StackLayout>
+    <ScrollView>
+
+
+        <CollectionView
+            x:Name="collectionView"
+            Margin="10,25,10,0"
+            EmptyView="Nenhum Aluno Cadastrado No Momento"
+            SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+
                         <StackLayout Orientation="Horizontal">
                             <StackLayout>
-                                <Label Text="Aluno:"/>
-                                <Label Text="{Binding NomeAluno}"
-                               FontSize="35"
-                               x:Name="lblNomeAluno"
-                               FontFamily="MontserratBold"
-                               TextColor="Black" />
+                                <Label
+                                    x:Name="lblNomeAluno"
+                                    FontFamily="MontserratBold"
+                                    FontSize="35"
+                                    Text="{Binding NomeAluno}"
+                                    TextColor="Black" />
+
                             </StackLayout>
-                            <Image Source="trashcan.png"
-                                   HorizontalOptions="EndAndExpand"/>
+                            <Image HorizontalOptions="EndAndExpand" Source="trashcan.png" />
+
                         </StackLayout>
-                          
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Plano: " 
-                                       FontFamily="MontserratRegular"/>
-                                <Label Text="{Binding TipoPlano}"
-                                       FontFamily="MontserratRegular"/>
+
+                        <Label
+                            Margin="0,20,0,0"
+                            FontSize="20"
+                            Text="Valor da Mensalidade"
+                            TextColor="OrangeRed" />
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                                FontSize="15"
+                                Text="R$"
+                                TextColor="OrangeRed"
+                                VerticalOptions="Center" />
+
+                            <Entry
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric"
+                                Text="" />
+                        </StackLayout>
+
+                        <Grid
+                            Margin="20,20,20,0"
+                            ColumnDefinitions="2*,2*"
+                            RowDefinitions="2*,2*">
+                            <StackLayout Grid.Row="0" Grid.Column="0">
+                                <Label
+                                    FontSize="20"
+                                    Text="Planos"
+                                    TextColor="OrangeRed" />
+
+                                <Frame>
+                                    <StackLayout RadioButtonGroup.GroupName="Plano" RadioButtonGroup.SelectedValue="{Binding PlanoButton}">
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="Individual"
+                                                TextColor="OrangeRed"
+                                                Value="Individual" />
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="Trio"
+                                                TextColor="OrangeRed"
+                                                Value="Trio" />
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Contrato: "
-                                       FontFamily="MontserratRegular"/>
-                                <Label Text="{Binding PeriodoContrato}"
-                                       FontFamily="MontserratRegular"/>
+                            <!--  Período  -->
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Label
+                                    FontSize="20"
+                                    Text="Período"
+                                    TextColor="OrangeRed" />
+
+                                <Frame>
+                                    <StackLayout RadioButtonGroup.GroupName="Periodo" RadioButtonGroup.SelectedValue="{Binding QtdeVezesPorSemana}">
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="2x"
+                                                TextColor="OrangeRed"
+                                                Value="2x" />
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="3x"
+                                                TextColor="OrangeRed"
+                                                Value="3x" />
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
 
+                            <!--  Validade  -->
+                            <StackLayout Grid.Row="1" Grid.Column="0">
+                                <Label
+                                    FontSize="20"
+                                    Text="Validade"
+                                    TextColor="OrangeRed" />
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Vence Em: "
-                                       FontSize="13"
-                                       FontFamily="MontserratRegular"/>
-                                <Label Text="{Binding VencimentoEm}"
-                                       FontSize="13"
-                                       FontFamily="MontserratRegular"/>
+                                <Frame>
+                                    <StackLayout RadioButtonGroup.GroupName="Prazo" RadioButtonGroup.SelectedValue="{Binding PrazoButton}">
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="Mensal"
+                                                TextColor="OrangeRed"
+                                                Value="Mensal" />
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="Trimestral"
+                                                TextColor="OrangeRed"
+                                                Value="Trimestral" />
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <RadioButton
+                                                Content="Semestral"
+                                                TextColor="OrangeRed"
+                                                Value="Semestral" />
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
+                        </Grid>
+                        <Button
+                            Margin="15,20,15,0"
+                            BackgroundColor="OrangeRed"
+                            CornerRadius="10"
+                            Text="Atualizar"
+                            TextColor="White" />
 
-                        </StackLayout>                    
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-        <!--<CollectionView.EmptyView>
+            <!--<CollectionView.EmptyView>
             <ContentView>
                 <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                     <Label
@@ -66,5 +169,7 @@
             </ContentView>
         </CollectionView.EmptyView>-->
 
-    </CollectionView>
+        </CollectionView>
+
+    </ScrollView>
 </ContentPage>

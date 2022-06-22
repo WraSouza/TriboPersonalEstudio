@@ -15,7 +15,9 @@ namespace TriboPersonalEstudio.View
         public CadastroAlunoView()
         {
             InitializeComponent();
-            
+
+            datePicker.Date = DateTime.Today;
+
         }
         
     }

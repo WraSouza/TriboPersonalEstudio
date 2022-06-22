@@ -2,79 +2,116 @@
 <ContentPage
     x:Class="TriboPersonalEstudio.View.AlunosView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TriboPersonalEstudio.Controls"
     xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel">
     <ContentPage.BindingContext>
         <mvvm:AlunosViewModel />
     </ContentPage.BindingContext>
 
-    <CollectionView x:Name="collectionView" Margin="2,5,2,0" SelectionMode="Single" SelectionChangedCommand="{Binding IrParaAlunoDetailView}">
-        <CollectionView.ItemsLayout>
+    <Grid>
+
+        <CollectionView
+            x:Name="collectionView"
+            Margin="2,5,2,0"
+            ItemsSource="{Binding NovosUsuarios}"
+            SelectionChangedCommand="{Binding IrParaAlunoDetailView}"
+            SelectionMode="Single">
+            <!--<CollectionView.ItemsLayout>
             <GridItemsLayout
                 HorizontalItemSpacing="2"
                 Orientation="Vertical"
                 Span="2"
                 VerticalItemSpacing="5" />
-        </CollectionView.ItemsLayout>
+        </CollectionView.ItemsLayout>-->
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Frame BorderColor="Black"
-                           BackgroundColor="#F5F5F5"
-                           CornerRadius="10">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Path=BindingContext.IrParaAlunoDetailView, Source={x:Reference collectionView}}"
-                                                  CommandParameter="{Binding .}"/>
-                        </Frame.GestureRecognizers>
-                        <StackLayout>
-                            <Label Text="{Binding NomeAluno}"
-                                   x:Name="lblNomeAluno"
-                                   FontFamily="MontserratBold"
-                                   TextColor="Black" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Plano: " 
-                                       FontFamily="MontserratRegular"/>
-                                <Label Text="{Binding TipoPlano}"
-                                       FontFamily="MontserratRegular"/>
-                            </StackLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="10,10,10,0">
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Contrato: "
-                                       FontFamily="MontserratRegular"/>
-                                <Label Text="{Binding PeriodoContrato}"
-                                       FontFamily="MontserratRegular"/>
-                            </StackLayout>
+                        <Frame
+                            BackgroundColor="WhiteSmoke"
+                            BorderColor="#FAF9F9"
+                            CornerRadius="10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.IrParaAlunoDetailView, Source={x:Reference collectionView}}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="2*,2*,2*" Padding="0">
+                                <Frame
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HeightRequest="80"
+                                    HorizontalOptions="Center"
+                                    IsClippedToBounds="True"
+                                    VerticalOptions="Start" 
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    WidthRequest="80">
+                                    <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
+
+                                </Frame>
+
+                                <StackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                            x:Name="lblNomeAluno"
+                                            FontFamily="MontserratBold"
+                                            Text="{Binding NomeAluno}"
+                                            TextColor="Black" />
+                                        <Image HorizontalOptions="EndAndExpand" Source="edit.png" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontFamily="MontserratRegular" Text="Plano: " />
+                                        <Label FontFamily="MontserratRegular" Text="{Binding TipoPlano}" />
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontFamily="MontserratRegular" Text="Contrato: " />
+                                        <Label FontFamily="MontserratRegular" Text="{Binding PeriodoContrato}" />
+                                    </StackLayout>
 
 
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Vence Em: "
-                                       FontSize="13"
-                                       FontFamily="MontserratRegular"/>
-                                <Label Text="{Binding VencimentoEm}"
-                                       FontSize="13"
-                                       FontFamily="MontserratRegular"/>
-                            </StackLayout>                          
-                            
-                        </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                            FontFamily="MontserratRegular"
+                                            FontSize="13"
+                                            Text="Vence Em: " />
+                                        <Label
+                                            FontFamily="MontserratRegular"
+                                            FontSize="13"
+                                            Text="{Binding VencimentoEm}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-                        
-                    </Frame>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <ContentView>
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label
+                            FontFamily="MontserratBold"
+                            FontSize="15"
+                            Text="Nenhum Aluno Cadastrado No Momento"
+                            TextColor="Black" />
+                    </StackLayout>
+                </ContentView>
+            </CollectionView.EmptyView>
 
-        <CollectionView.EmptyView>
-            <ContentView>
-                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                    <Label
-                        FontSize="15"
-                        Text="Nenhum Aluno Cadastrado No Momento"
-                        FontFamily="MontserratBold"
-                        TextColor="Black" />
-                </StackLayout>
-            </ContentView>
-        </CollectionView.EmptyView>
+        </CollectionView>
 
-    </CollectionView>
+        <Image
+            Margin="0,0,10,10"
+            HeightRequest="40"
+            HorizontalOptions="EndAndExpand"
+            Source="plus.png"
+            VerticalOptions="EndAndExpand">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding IrParaCadastroAlunoView}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+    </Grid>
 </ContentPage>

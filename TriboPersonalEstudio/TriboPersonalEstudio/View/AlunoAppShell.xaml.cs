@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace TriboPersonalEstudio.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AlunoAppShell : ContentPage
+    public partial class AlunoAppShell : Shell
     {
         public AlunoAppShell()
         {

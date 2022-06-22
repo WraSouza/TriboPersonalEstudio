@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TriboPersonalEstudio.FirebaseServices;
+using TriboPersonalEstudio.Model;
+using TriboPersonalEstudio.ViewModel;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,13 +18,15 @@ namespace TriboPersonalEstudio.View
         public AlunosView()
         {
             InitializeComponent();
+            BindingContext = new AlunosViewModel();
         }
 
         protected async override void OnAppearing()
         {
             UserServices usuarios = new UserServices();
+
             collectionView.ItemsSource = await usuarios.RetornaAlunos();
         }
-       
+
     }
 }

@@ -67,7 +67,8 @@ namespace TriboPersonalEstudio.FirebaseServices
                         TipoPlano = usuario.TipoPlano,
                         CreatedAt = usuario.CreatedAt,
                         VencimentoEm = usuario.VencimentoEm,
-                        ValorMensalidade = usuario.ValorMensalidade
+                        ValorMensalidade = usuario.ValorMensalidade,
+                        CaminhoImagem = usuario.CaminhoImagem
                     });                
 
                 return true;
@@ -109,7 +110,8 @@ namespace TriboPersonalEstudio.FirebaseServices
                     TipoPlano = item.Object.TipoPlano,
                     VencimentoEm = item.Object.VencimentoEm,
                     ValorMensalidade = item.Object.ValorMensalidade,
-                    PeriodoContrato = item.Object.PeriodoContrato
+                    PeriodoContrato = item.Object.PeriodoContrato,
+                    CaminhoImagem = item.Object.CaminhoImagem
                     
                 }).ToList();
         }

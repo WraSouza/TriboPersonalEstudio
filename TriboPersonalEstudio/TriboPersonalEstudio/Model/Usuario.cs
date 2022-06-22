@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TriboPersonalEstudio.Model
 {
-    internal class Usuario
+    public class Usuario
     {
         public string NomeAluno { get; set; }
         public string NomeUsuario { get; set; }       
@@ -17,5 +17,6 @@ namespace TriboPersonalEstudio.Model
         public object QtdeVezesSemana { get; set; }
         public object PeriodoContrato { get; set; }
         public string ValorMensalidade { get; set; }
+        public string CaminhoImagem { get; set; }
     }
 }
