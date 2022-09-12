@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             x:Class="TriboPersonalEstudio.View.CadastroExercicioAlunoView">
+
+    <ContentPage.BindingContext>
+        <mvvm:CadastrarExercicioAlunoViewModel/>
+    </ContentPage.BindingContext>
+    
+    
+    <ContentPage.Content>
+        <StackLayout>
+            
+            
+            <CollectionView x:Name="collectionView" Margin="10,50,10,0" ItemsSource="{Binding Usuarios}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="20,10,20,0">
+
+                            <Frame                                                
+                                                Padding="0"
+                                                CornerRadius="60"
+                                                HeightRequest="{OnPlatform UWP=130, Android=130, iOS=110}"
+                                                HorizontalOptions="Center"
+                                                IsClippedToBounds="True"
+                                                VerticalOptions="Start"
+                                                WidthRequest="{OnPlatform UWP=130, Android=130, iOS=110}">
+                                <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
+
+                            </Frame>
+
+                            <Label
+                                  x:Name="lblNomeAluno"   
+                                  FontSize="30"
+                                  HorizontalOptions="CenterAndExpand"
+                                  Text="{Binding NomeAluno}"
+                                  TextColor="OrangeRed" />
+
+                            <Label
+                                Margin="0,15,0,0"
+                                FontSize="20"
+                                Text="Dia de Semana"
+                                 TextColor="OrangeRed" />
+
+                            <Frame Margin="0,5,20,0" BorderColor="Gainsboro" CornerRadius="10" BackgroundColor="White">
+                                <Grid ColumnDefinitions="2*,2*" RadioButtonGroup.GroupName="Periodo" RadioButtonGroup.SelectedValue="{Binding Path=BindingContext.DiaSemanaButton,
+                                        Source={x:Reference collectionView}}">
+                                   
+                                        <RadioButton
+                                                Grid.Column="0"
+                                                Grid.Row="0"                                                
+                                                Content="Segunda-Feira"
+                                                TextColor="OrangeRed"
+                                                Value="1" />
+
+                                        <RadioButton
+                                                Grid.Column="1"                                                
+                                                Content="Terça-Feira"
+                                                TextColor="OrangeRed"
+                                                Value="2" />
+
+                                        <RadioButton
+                                                Grid.Column="0"
+                                                Grid.Row="1"                                                
+                                                Content="Quarta-Feira"
+                                                TextColor="OrangeRed"
+                                                Value="3" />                                   
+
+                                    
+                                        <RadioButton
+                                                Grid.Column="1"
+                                                Grid.Row="1"                                                
+                                                Content="Quinta-Feira"
+                                                TextColor="OrangeRed"
+                                                Value="4" />
+
+                                    <RadioButton
+                                                Grid.Column="0"
+                                                Grid.Row="2"                                                
+                                                Content="Sexta-Feira"
+                                                TextColor="OrangeRed"
+                                                Value="5" />
+
+                                    <RadioButton
+                                                Grid.Column="1"
+                                                Grid.Row="2"                                                
+                                                Content="Sábado"
+                                                TextColor="OrangeRed"
+                                                Value="6" />
+
+                                    <RadioButton
+                                                Grid.Column="0"
+                                                Grid.Row="3"                                                
+                                                Content="Domingo"
+                                                TextColor="OrangeRed"
+                                                Value="0" />
+
+                                </Grid>
+                            </Frame>
+                            
+                            <!--Grupo-->
+                            <Label
+                                Margin="0,25,0,0"
+                                FontSize="20"
+                                Text="Grupo Muscular"
+                                 TextColor="OrangeRed" />
+
+                            <Entry Placeholder="Informe Grupos Musculares"
+                                   Text="{Binding Path=BindingContext.GrupoExercicios,
+                                       Source={x:Reference collectionView}}"/>
+
+                            <Label
+                                Margin="0,25,0,0"
+                                FontSize="20"
+                                Text="Hora Inicial"
+                                TextColor="OrangeRed" />
+
+                            <TimePicker x:Name="tpInicial" Time="{Binding Path=BindingContext.HoraInicial,
+                                       Source={x:Reference collectionView}}"/>
+
+                            <Label
+                                Margin="0,25,0,0"
+                                FontSize="20"
+                                Text="Hora Final"
+                                TextColor="OrangeRed" />
+
+                            <TimePicker x:Name="tpFinal" Time="{Binding Path=BindingContext.HoraFinal,
+                                       Source={x:Reference collectionView}}"/>
+
+                            <Button Text="Salvar"
+                                    Command="{Binding Path=BindingContext.CadastrarExercicioAlunoCommand,
+                                       Source={x:Reference collectionView}}" CommandParameter="{Binding .}"
+                                    VerticalOptions="EndAndExpand"
+                                    Margin="0,50,0,0"/>                          
+
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

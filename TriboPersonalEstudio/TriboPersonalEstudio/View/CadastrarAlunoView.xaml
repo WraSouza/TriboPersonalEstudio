@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             x:Class="TriboPersonalEstudio.View.CadastrarAlunoView">
+
+    <ContentPage.BindingContext>
+        <mvvm:CadastrarAlunoViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid>
+            <StackLayout Margin="10,0,10,0">
+
+                <Frame HorizontalOptions="Center"
+                   Margin="0,20,0,0"
+                       Padding="0" 
+                       BorderColor="Gainsboro"
+                       CornerRadius="80"
+                       IsClippedToBounds="True"
+                       WidthRequest="150"
+                       HeightRequest="150">
+                    <Image Source="{Binding CaminhoImagem}"                            
+                           Aspect="Fill"/>
+
+                </Frame>
+
+                <Image Source="camera.png"
+                       TranslationX="70"
+                       TranslationY="-40"
+                       HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelecionarImagem}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="Nome"    
+                       TextColor="OrangeRed"
+                       FontFamily="OpenSansSemiBold"
+                       FontSize="20"/>
+
+                <Frame Margin="0,10,20,0" Padding="0" BackgroundColor="#FFFAFA" HeightRequest="50">
+                    <Entry Margin="0,10,0,0" FontSize="15" Text="{Binding NomeAluno}"/>
+                </Frame>
+
+                <Label Text="Nome de Usuário"
+                       FontFamily="OpenSansSemiBold"
+                       TextColor="OrangeRed"
+                       Margin="0,20,0,0"
+                       FontSize="20"/>
+
+                <Frame Margin="0,10,20,0" Padding="0" BackgroundColor="#FFFAFA" HeightRequest="50">
+                    <Entry Margin="0,10,0,0" Text="{Binding NomeUsuario}"/>
+                </Frame>
+
+                <Label
+                    Margin="0,20,0,0"                    
+                    FontSize="20"
+                    Text="Valor da Mensalidade"
+                    TextColor="OrangeRed" />
+
+                <Frame Margin="0,10,20,0" Padding="0" BackgroundColor="#FFFAFA" HeightRequest="50">
+                    <Entry Text="{Binding ValorMensalidade}" />
+                </Frame>
+
+
+                <Label
+                    Margin="0,20,0,0"
+                    FontFamily="MontserratMedium"
+                    FontSize="20"
+                    Text="Data De Início"
+                    TextColor="OrangeRed" />
+
+                <Frame Margin="0,10,20,0" Padding="0" BackgroundColor="#FFFAFA" HeightRequest="50">
+                    <DatePicker x:Name="datePicker" Date="{Binding CreatedAt}" Margin="10,0,0,0">
+                        <DatePicker.Format>dd-MMMM-yyyy</DatePicker.Format>
+                    </DatePicker>
+
+                </Frame>
+
+                <Label
+                    Margin="0,20,20,0"                    
+                    FontSize="20"
+                    Text="Planos"
+                    TextColor="OrangeRed" />
+
+                <Frame Margin="0,10,20,0" BackgroundColor="#FFFAFA">
+                    <StackLayout RadioButtonGroup.GroupName="Plano" RadioButtonGroup.SelectedValue="{Binding PlanoButton}">
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="Individual"
+                                FontSize="15"
+                                TextColor="OrangeRed"
+                                Value="Individual" />
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="Trio"
+                                TextColor="OrangeRed"
+                                Value="Trio" />
+
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--  Período  -->
+                <Label
+                    Margin="0,15,0,0"
+                    FontSize="20"
+                    Text="Período"
+                    TextColor="OrangeRed" />
+
+                <Frame Margin="0,10,20,0" BackgroundColor="#FFFAFA">
+                    <StackLayout RadioButtonGroup.GroupName="Periodo" RadioButtonGroup.SelectedValue="{Binding QtdeVezesPorSemana}">
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="2x"
+                                TextColor="OrangeRed"
+                                Value="2x" />
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="3x"
+                                TextColor="OrangeRed"
+                                Value="3x" />
+
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--  Validade  -->
+                <Label
+                    Margin="0,15,0,0"
+                    FontSize="20"
+                    Text="Validade"
+                    TextColor="OrangeRed" />
+
+                <Frame Margin="0,10,20,0" BackgroundColor="#FFFAFA">
+                    <StackLayout RadioButtonGroup.GroupName="Prazo" RadioButtonGroup.SelectedValue="{Binding PrazoButton}">
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="Mensal"
+                                TextColor="OrangeRed"
+                                Value="Mensal" />
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="Trimestral"
+                                TextColor="OrangeRed"
+                                Value="Trimestral" />
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton
+                                Content="Semestral"
+                                TextColor="OrangeRed"
+                                Value="Semestral" />
+
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Button
+                    Margin="20,20,30,0"
+                    BackgroundColor="OrangeRed"
+                    FontSize="15"
+                    FontFamily="OpenSansSemiBold"
+                    Command="{Binding CadastrarAlunoCommand}"
+                    CornerRadius="10"
+                    Text="Cadastrar"
+                    TextColor="White" />
+
+            </StackLayout>
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center"
+                Color="OrangeRed" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

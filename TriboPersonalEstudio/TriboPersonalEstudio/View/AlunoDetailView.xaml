@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             x:Class="TriboPersonalEstudio.View.AlunoDetailView">
+
+    <ContentPage.BindingContext>
+        <mvvm:AlunoDetailViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid>            
+                <CollectionView x:Name="collectionView" Margin="10,0,10,0" ItemsSource="{Binding Usuarios}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="20,10,20,0">                                    
+                                    
+                                        <Frame                                                
+                                                Padding="0"
+                                                CornerRadius="60"
+                                                HeightRequest="{OnPlatform UWP=130, Android=130, iOS=110}"
+                                                HorizontalOptions="Center"
+                                                IsClippedToBounds="True"
+                                                VerticalOptions="Start"
+                                                WidthRequest="{OnPlatform UWP=130, Android=130, iOS=110}">
+                                            <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
+
+                                        </Frame>                                      
+                                            
+                                                <Label
+                                                        x:Name="lblNomeAluno"   
+                                                        FontSize="30"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        Text="{Binding NomeAluno}"
+                                                        TextColor="OrangeRed" />
+                                                
+                                            
+                                            <StackLayout Orientation="Horizontal" Margin="0,30,0,0">
+                                                <Label TextColor="OrangeRed" Text="Plano: " FontSize="30" />
+                                                <Label TextColor="Black" FontSize="30" Text="{Binding TipoPlano}" />
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label TextColor="OrangeRed" FontSize="30" Text="Contrato: " />
+                                                <Label TextColor="Black" FontSize="30" Text="{Binding PeriodoContrato}" />
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                        TextColor="OrangeRed"
+                                                        FontSize="30"
+                                                        Text="Vence Em: " />
+                                                <Label                                            
+                                                        FontSize="30"
+                                                        TextColor="Black"
+                                                        Text="{Binding VencimentoEm}" />
+                                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                                        TextColor="OrangeRed"
+                                                        FontSize="30"
+                                                        Text="Valor Mensalidade: " />
+                                <Label                                            
+                                                        FontSize="30"
+                                                        TextColor="Black"
+                                                        Text="{Binding ValorMensalidade}" />
+                            </StackLayout>
+
+                            <Grid ColumnDefinitions="2*,2*" Margin="0,100,0,0">
+                                <Frame HorizontalOptions="CenterAndExpand" Grid.Column="0">
+                                    <StackLayout>
+                                        <Image Source="coloredmuscle.png"/>
+                                        <Label Text="Cadastrar Exercícios"
+                                                       HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.AbrirCadastroExercicio, Source={x:Reference collectionView}}" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+
+                                </Frame>
+
+                                <Frame HorizontalOptions="CenterAndExpand" Grid.Column="1">
+                                    <StackLayout>
+                                        <Image Source="delete.png"/>
+                                        <Label Text="Inativar Usuário"
+                                               HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+
+                                </Frame>
+                            </Grid>
+                                
+                                
+                        </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

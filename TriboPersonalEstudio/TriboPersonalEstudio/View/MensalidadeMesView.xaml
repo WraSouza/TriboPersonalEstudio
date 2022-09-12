@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             Title="Finanças"
+             x:Class="TriboPersonalEstudio.View.MensalidadeMesView">
+
+    <ContentPage.BindingContext>
+        <mvvm:MensalidadeMesViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <StackLayout>
+
+        <Label x:Name="lblMesAtual"
+               Margin="20,0,0,0"
+               FontFamily="OpenSansMedium"
+               FontSize="20" />
+
+        <RefreshView Command="{Binding AtualizaTela}"
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshColor="OrangeRed">
+            <CollectionView x:Name="collectionView" SelectionChangedCommand="{Binding AlteraStatusMensalidadePago}" SelectionMode="Single" Margin="10,0,10,0" ItemsSource="{Binding Usuarios}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame
+                            BackgroundColor="WhiteSmoke"
+                            BorderColor="#FAF9F9"
+                            CornerRadius="10">
+
+                            <StackLayout>
+                                <Grid Padding="0" ColumnSpacing="15" ColumnDefinitions="2*,2*,2*">
+                                    <Frame
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HeightRequest="90"
+                                    HorizontalOptions="Center"
+                                    IsClippedToBounds="True"
+                                    VerticalOptions="Start"
+                                    WidthRequest="90">
+                                        <Image Aspect="Fill" Source="{Binding CaminhoImagem}"/>
+                                    </Frame>
+
+                                    <StackLayout
+                                    HorizontalOptions="Center"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                            x:Name="lblNomeAluno"   
+                                            FontSize="20"
+                                            Text="{Binding NomeAluno}"
+                                            TextColor="Black" />
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Valor Mensalidade"
+                                                   FontFamily="OpenSansSemiBold"
+                                                   FontSize="15"
+                                                   TextColor="OrangeRed"/>
+
+                                            <Label Text="{Binding ValorMensalidade}"/>
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Pago"
+                                           FontFamily="OpenSansSemiBold"
+                                           FontSize="15"
+                                           TextColor="OrangeRed"/>
+
+                                            <Switch IsToggled="False" ThumbColor="OrangeRed"/>
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Grid>
+
+                                <Button Text="Confirmar"   
+                                            Command="{Binding Path=BindingContext.AlteraStatusMensalidadePago,
+                                        Source={x:Reference collectionView}}" CommandParameter="{Binding .}"
+                                    FontSize="15"
+                                    Margin="35,25,35,0"/>
+
+
+                            </StackLayout>
+
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+    </StackLayout>
+</ContentPage>

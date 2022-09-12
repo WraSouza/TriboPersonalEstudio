@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             Title="Alunos"
+             x:Class="TriboPersonalEstudio.View.AlunosView">
+
+    <ContentPage.BindingContext>
+        <mvvm:AlunosViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <RefreshView Command="{Binding AtualizaTela}"
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshColor="OrangeRed">
+            <CollectionView x:Name="collectionView" EmptyView="Não Há Alunos Cadastrados" Margin="10,0,10,0" ItemsSource="{Binding Usuarios}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="5">
+
+                            <Frame
+                            BackgroundColor="WhiteSmoke"
+                            BorderColor="#FAF9F9"
+                            CornerRadius="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.IrParaAlunoDetailView,
+                                        Source={x:Reference collectionView}}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                               
+                                <Grid Padding="0" ColumnSpacing="15" ColumnDefinitions="2*,2*,2*">
+                                    <Frame
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HeightRequest="{OnPlatform UWP=130, Android=110, iOS=110}"
+                                    HorizontalOptions="Center"
+                                    IsClippedToBounds="True"
+                                    VerticalOptions="Start"
+                                    WidthRequest="{OnPlatform UWP=130, Android=110, iOS=110}">
+                                        <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
+
+                                    </Frame>
+
+                                    <StackLayout
+                                    HorizontalOptions="Center"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                            x:Name="lblNomeAluno"
+                                            FontFamily="OpenSansRegular"
+                                            FontSize="20"
+                                            Text="{Binding NomeAluno}"
+                                            TextColor="OrangeRed" />
+
+                                            <Image Source="muscles.svg" HeightRequest="30" HorizontalOptions="EndAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.IrParaCadastroExerciciosAlunoView, Source={x:Reference collectionView}}" CommandParameter="{Binding .}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="Black" Text="Plano: " FontSize="{OnPlatform UWP=20, Android=15}" />
+                                            <Label TextColor="Gray" Text="{Binding TipoPlano}" FontSize="{OnPlatform UWP=20, Android=15}" />
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="Black" Text="Contrato: " />
+                                            <Label TextColor="Gray" Text="{Binding PeriodoContrato}" />
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                            TextColor="Black"
+                                            FontSize="13"
+                                            Text="Vence Em: " />
+                                            <Label                                            
+                                            FontSize="13"
+                                            TextColor="Gray"
+                                            Text="{Binding VencimentoEm}" />
+                                        </StackLayout>                                    
+                                        
+                                    </StackLayout>
+                                    
+                                </Grid>                                    
+                                
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Image
+            Margin="0,0,10,10"
+            HeightRequest="40"
+            HorizontalOptions="EndAndExpand"
+            Source="plus.png"
+            VerticalOptions="EndAndExpand">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding AbrirCadastroAlunoView}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+    </Grid>
+</ContentPage>

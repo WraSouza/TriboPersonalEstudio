@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             Title="Finanças"
+             x:Class="TriboPersonalEstudio.View.FinancasView">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <Label
+                    x:Name="lblMesAtual"
+                    Margin="10,20,0,0"
+                    TextColor="OrangeRed"
+                    FontFamily="OpenSansSemiBold"
+                    FontSize="20" />
+
+                <StackLayout Padding="0" Orientation="Horizontal">
+
+                    <Label
+                        Margin="10,0,0,0"
+                        FontSize="30"
+                        Text="R$"
+                        FontFamily="OpenSansRegular"
+                        TextColor="OrangeRed" />
+
+                    <Label
+                        x:Name="lblValor"
+                        Margin="10,0,0,0"
+                        FontFamily="OpenSansSemiBold"
+                        FontSize="30"
+                        TextColor="OrangeRed" />
+
+                    <Label Text="(Em Caixa)" FontFamily="OpenSansMedium" VerticalOptions="Center"/>
+                </StackLayout>
+
+                <Label
+                    Margin="10,10,0,0"
+                    FontFamily="OpenSansSemiBold"
+                    TextColor="OrangeRed"
+                    FontSize="30"
+                    Text="Previsto" />                
+
+                <forms:ChartView
+                    x:Name="grafico"
+                    Margin="10,10,10,0"
+                    HeightRequest="{OnPlatform UWP=400,Android=300,iOS=300}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label Text="Situação Mensal"
+                       Margin="20"
+                       FontSize="20"
+                       TextColor="OrangeRed"
+                       FontFamily="OpenSansSemiBold"/>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Janeiro"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblJaneiro" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageJaneiro" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemJaneiro" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Fevereiro"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblFevereiro" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageFevereiro" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemFevereiro" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Março"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblMarco" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageMarco" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemMarco" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Abril"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblAbril" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageAbril" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemAbril" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Maio"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblMaio" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageMaio" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemMaio" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Junho"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblJunho" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageJunho" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemJunho" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Julho"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblJulho" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageJulho" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemJulho" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Agosto"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblAgosto" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageAgosto" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemAgosto" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Setembro"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblSetembro" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageSetembro" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemSetembro" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Outubro"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblOutubro" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageOutubro" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemOutubro" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Novembro"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblNovembro" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image x:Name="imageNovembro" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemNovembro" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" BorderColor="Gainsboro" Margin="10,0,10,0" CornerRadius="10">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Dezembro"
+                               TextColor="OrangeRed"
+                               FontSize="20"
+                               FontFamily="OpenSansSemiBold"/>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <Label Text="R$" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                                <Label x:Name="lblDezembro" FontFamily="OpenSansSemiBold" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                            <Image x:Name="imageDezembro" HeightRequest="20"/>
+                            <Label x:Name="lblPorcentagemDezembro" FontFamily="OpenSansMedium" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

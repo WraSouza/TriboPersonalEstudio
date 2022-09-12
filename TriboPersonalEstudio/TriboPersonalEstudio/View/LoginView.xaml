@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             x:Class="TriboPersonalEstudio.View.LoginView">
+
+    <ContentPage.BindingContext>
+        <mvvm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+
+            <StackLayout
+                Margin="50"
+                HorizontalOptions="Center"
+                VerticalOptions="StartAndExpand">
+                <Image Source="triboslogo.png" />
+
+            </StackLayout>
+
+            <StackLayout Margin="10,200,10,0" VerticalOptions="CenterAndExpand">
+
+                <Label
+                    FontFamily="OpenSansSemiBold"
+                    FontSize="20"
+                    Text="Usuário"
+                    TextColor="OrangeRed" />
+                <Entry Text="{Binding Nome}"/>
+                
+
+                <Label
+                    Margin="0,20,0,0"
+                    FontFamily="OpenSansSemiBold"
+                    FontSize="20"
+                    Text="Senha"
+                    TextColor="OrangeRed" />
+
+                <Entry Text="{Binding Senha}"
+                       IsPassword="True"/>
+                
+
+                <Button
+                    Margin="20,100,20,0" 
+                    Command="{Binding LoginCommand}"
+                    Text="Login" />
+
+                <Label Margin="0,50,0,0" HorizontalTextAlignment="Center" FontFamily="MontserratMedium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Não é aluno? "/>
+                            <Span Text="Clique Aqui" TextDecorations="Underline" TextColor="Blue"/>
+                            <Span Text= "  e conheça nossos planos."/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center"
+                Color="OrangeRed" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
