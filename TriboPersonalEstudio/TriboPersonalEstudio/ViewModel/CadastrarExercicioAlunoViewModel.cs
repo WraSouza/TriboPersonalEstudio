@@ -85,20 +85,47 @@ namespace TriboPersonalEstudio.ViewModel
                 DiaSemana = diaSemana,
                 GrupoExercicio = GrupoExercicios,
                 CaminhoImagem = Preferences.Get("ImagemAluno", "default_value"),
-                HoraInicial = HoraInicial.ToString("HH:mm"),
-                HoraFinal = HoraFinal.ToString()
+                HoraInicial = String.Format("{0:00}:{1:00}",HoraInicial.Hours, HoraInicial.Minutes),
+                HoraFinal = String.Format("{0:00}:{1:00}", HoraFinal.Hours, HoraFinal.Minutes)
             };
 
             bool verificaConexao = Conectividade.VerificaConectividade();
 
             if (verificaConexao)
             {
-                bool confirmaCadastro = await exercicioServices.CadastraExercicio(novoExercicio);
-
-                if (confirmaCadastro)
+                if (DiaSemanaButton != null)
                 {
-                    await Application.Current.MainPage.DisplayAlert("", "Cadastro Realizado Com Sucesso", "OK");
+                    if (String.IsNullOrEmpty(GrupoExercicios))
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Ops..", "O Campo Grupo de Exercícios Dev Ser Preenchido", "OK");
+                    }
+                    else
+                    {
+                        bool verificaHorarios = Horario.VerificaHorario(HoraInicial, HoraFinal);
+                        if (verificaHorarios)
+                        {
+
+                            bool confirmaCadastro = await exercicioServices.CadastraExercicio(novoExercicio);
+
+                            if (confirmaCadastro)
+                            {
+                                await Application.Current.MainPage.DisplayAlert("", "Cadastro Realizado Com Sucesso", "OK");
+                            }
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Ops..", "Horário Final Deve Ser Maior que Hora de Início", "OK");
+                        }
+                    }
+                    
+
                 }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Ops..", "Favor Selecionar Um Dia da Semana", "OK");
+                }
+
+
             }
             else
             {

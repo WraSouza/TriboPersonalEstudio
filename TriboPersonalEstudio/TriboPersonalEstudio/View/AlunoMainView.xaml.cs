@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.LocalNotification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace TriboPersonalEstudio.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AlunoAppShell : Shell
+    public partial class AlunoMainView : ContentPage
     {
-        public AlunoAppShell()
+        public AlunoMainView()
         {
             InitializeComponent();
         }
+
+        
     }
 }

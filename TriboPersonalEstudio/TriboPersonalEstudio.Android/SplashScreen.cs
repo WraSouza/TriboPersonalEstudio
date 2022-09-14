@@ -5,6 +5,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+
+using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,9 @@ namespace TriboPersonalEstudio.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            
+            //LocalNotificationCenter.CreateNotificationChannel();
 
             StartActivity(typeof(MainActivity));
             Finish();

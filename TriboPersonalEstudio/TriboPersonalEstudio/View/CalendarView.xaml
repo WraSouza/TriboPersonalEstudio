@@ -1,12 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             Title="Agenda Semanal"
              x:Class="TriboPersonalEstudio.View.CalendarView">
+    <ContentPage.BindingContext>
+        <mvvm:CalendarViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Agenda"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+
+            <RefreshView
+            Command="{Binding AtualizaTela}"
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshColor="OrangeRed">
+                <CollectionView
+                x:Name="collectionView"
+                Margin="10,20,10,0"
+                IsGrouped="True"
+                ItemsSource="{Binding Exercicios}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                        HorizontalItemSpacing="2"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label
+                                FontFamily="MontserratBold"
+                                FontSize="15"
+                                Text="Não Há Dados Cadastrados No Momento"
+                                TextColor="Black" />
+                            </StackLayout>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="10,0,10,0" RowDefinitions="100">
+
+                                <Frame
+                                    BackgroundColor="WhiteSmoke"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="0"
+                                    BorderColor="#FAF9F9"
+                                    CornerRadius="10">
+
+
+                                    <Grid Padding="0" ColumnSpacing="15" ColumnDefinitions="2*,2*,2*">
+                                        <Frame
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HeightRequest="{OnPlatform UWP=130, Android=80, iOS=110}"
+                                    HorizontalOptions="Start"
+                                    IsClippedToBounds="True"
+                                    VerticalOptions="Center"
+                                    WidthRequest="{OnPlatform UWP=130, Android=80, iOS=110}">
+                                            <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
+
+                                        </Frame>
+
+                                        <StackLayout
+                                                HorizontalOptions="Center"
+                                                 Grid.Row="0"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2">
+                                            
+                                                <Label
+                                            x:Name="lblNomeAluno"
+                                            FontFamily="OpenSansSemiBold"
+                                            VerticalOptions="CenterAndExpand"
+                                            FontSize="20"
+                                            Text="{Binding NomeAluno}"
+                                            TextColor="OrangeRed" />      
+                                                                                                                    
+                                            
+
+                                        </StackLayout>
+
+                                    </Grid>
+
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Label
+                            Margin="0,5,0,0"
+                            BackgroundColor="OrangeRed"
+                            FontFamily="MontserratSemiBold"
+                            FontSize="20"
+                            Text="{Binding DiaSemana}"
+                            TextColor="White" />
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+
+                </CollectionView>
+            </RefreshView>            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

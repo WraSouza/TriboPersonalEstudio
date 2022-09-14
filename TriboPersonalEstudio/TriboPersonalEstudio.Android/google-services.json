@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "675825527467",
+    "firebase_url": "https://tribopersonalacademia-default-rtdb.firebaseio.com",
+    "project_id": "tribopersonalacademia",
+    "storage_bucket": "tribopersonalacademia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675825527467:android:4e5434f1a0dbb5621e65ee",
+        "android_client_info": {
+          "package_name": "com.mlsolucoes.tribopersonalestudio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675825527467-qj4r00bhtt9eauigrs2kkhber1ke52fl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCivQMwQnLRVPW_r0xeRDq8QdG2-rl61Us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675825527467-qj4r00bhtt9eauigrs2kkhber1ke52fl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -114,7 +114,8 @@ namespace TriboPersonalEstudio.ViewModel
 
                             if (senhaNoBanco == "1234")
                             {
-                                Application.Current.MainPage = new View.TrocarSenhaView();
+                                Application.Current.MainPage = new View.AlunoAppShell();
+                                //Application.Current.MainPage = new View.TrocarSenhaView();
                             }
                             else
                             {
