@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mvvm="clr-namespace:TriboPersonalEstudio.ViewModel"
+             Title="Início"
              x:Class="TriboPersonalEstudio.View.ProfessorMainView">
 
     <ContentPage.BindingContext>
@@ -9,6 +10,15 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
+
+        <StackLayout
+                Margin="40"
+                HorizontalOptions="Center"
+                VerticalOptions="StartAndExpand">
+            <Image Source="triboslogo.png" />
+
+        </StackLayout>
+
         <Label Text="Alunos do Dia"
                FontSize="30"
                Margin="10,0,0,0"

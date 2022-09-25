@@ -20,7 +20,7 @@ namespace TriboPersonalEstudio
             OneSignal.Default.PromptForPushNotificationsWithUserResponse();
 
 
-            //CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;
+           // CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;
         }
 
         private void Current_OnTokenRefresh(object source, FirebasePushNotificationTokenEventArgs e)

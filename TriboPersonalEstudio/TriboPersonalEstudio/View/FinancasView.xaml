@@ -49,7 +49,7 @@
                     VerticalOptions="CenterAndExpand" />
 
                 <Label Text="Situação Mensal"
-                       Margin="20"
+                       Margin="10"
                        FontSize="20"
                        TextColor="OrangeRed"
                        FontFamily="OpenSansSemiBold"/>

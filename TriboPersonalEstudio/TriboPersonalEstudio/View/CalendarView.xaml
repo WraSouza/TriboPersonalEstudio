@@ -18,15 +18,16 @@
                 <CollectionView
                 x:Name="collectionView"
                 Margin="10,20,10,0"
+                   
                 IsGrouped="True"
                 ItemsSource="{Binding Exercicios}">
-                    <CollectionView.ItemsLayout>
+                    <!--<CollectionView.ItemsLayout>
                         <GridItemsLayout
                         HorizontalItemSpacing="2"
                         Orientation="Vertical"
                         Span="2"
                         VerticalItemSpacing="5" />
-                    </CollectionView.ItemsLayout>
+                    </CollectionView.ItemsLayout>-->
                     <CollectionView.EmptyView>
                         <ContentView>
                             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -41,7 +42,59 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="10,0,10,0" RowDefinitions="100">
+                            <StackLayout Margin="10,10,10,0">
+
+                                <Frame
+                                    BackgroundColor="WhiteSmoke"                                    
+                                    Padding="0"
+                                    BorderColor="#FAF9F9"
+                                    CornerRadius="10">
+
+
+                                    <Grid Padding="0" ColumnSpacing="15" ColumnDefinitions="2*,2*,2*">
+                                        <Frame
+                                    
+                                    Padding="0"
+                                    CornerRadius="60"
+                                    HeightRequest="{OnPlatform UWP=130, Android=80, iOS=110}"
+                                    HorizontalOptions="Start"
+                                    IsClippedToBounds="True"
+                                    VerticalOptions="Center"
+                                    WidthRequest="{OnPlatform UWP=130, Android=80, iOS=110}">
+                                            <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
+
+                                        </Frame>
+
+                                        <StackLayout
+                                                HorizontalOptions="Center"
+                                                 Grid.Row="0"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2">
+
+                                            <Label
+                                            x:Name="lblNomeAluno"
+                                            FontFamily="OpenSansSemiBold"
+                                            VerticalOptions="StartAndExpand"
+                                            FontSize="20"
+                                            Text="{Binding NomeAluno}"
+                                            TextColor="OrangeRed" />
+
+                                            <Label Text="Grupos: "
+                                                   FontFamily="OpenSansSemiBold"
+                                                   TextColor="OrangeRed"/>
+                                            
+                                            <Label Text="{Binding GrupoExercicio}"
+                                                   FontFamily="OpenSansSemiBold"/>
+
+
+
+                                        </StackLayout>
+
+                                    </Grid>
+
+                                </Frame>
+                            </StackLayout>
+                            <!--<Grid Margin="10,0,10,0" RowDefinitions="100">
 
                                 <Frame
                                     BackgroundColor="WhiteSmoke"
@@ -69,7 +122,7 @@
                                         </Frame>
 
                                         <StackLayout
-                                                HorizontalOptions="Center"
+                                                HorizontalOptions="StartAndExpand"
                                                  Grid.Row="0"
                                                 Grid.Column="1"
                                                 Grid.ColumnSpan="2">
@@ -77,19 +130,22 @@
                                                 <Label
                                             x:Name="lblNomeAluno"
                                             FontFamily="OpenSansSemiBold"
-                                            VerticalOptions="CenterAndExpand"
+                                            VerticalOptions="StartAndExpand"
                                             FontSize="20"
                                             Text="{Binding NomeAluno}"
-                                            TextColor="OrangeRed" />      
-                                                                                                                    
-                                            
+                                            TextColor="OrangeRed" />
+
+                                            <Label Text="Grupos: "/>
+                                            <Label Text="{Binding GrupoExercicio}"/>
+
+
 
                                         </StackLayout>
 
                                     </Grid>
 
                                 </Frame>
-                            </Grid>
+                            </Grid>-->
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
 

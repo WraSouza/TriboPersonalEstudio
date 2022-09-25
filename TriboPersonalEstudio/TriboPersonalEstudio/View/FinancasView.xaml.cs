@@ -19,6 +19,7 @@ namespace TriboPersonalEstudio.View
         private float porcentagem;
         private bool verificaSeMaior;
         private bool verificaSeIgual;
+        private int currentYear = DateTime.Today.Year;
 
         public FinancasView()
         {
@@ -64,62 +65,62 @@ namespace TriboPersonalEstudio.View
             foreach (var valores in lista)
             {
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 1 && Convert.ToDateTime(valores.CreatedAt).Month == 1 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 1 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month == 1 ) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month == 1) && valores.StatusAluno == "Ativo")
                 {
                     somaJaneiro += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 2 && Convert.ToDateTime(valores.CreatedAt).Month <= 2 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 2 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 2) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 2) && valores.StatusAluno == "Ativo")
                 {
                     somaFevereiro += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 3 && Convert.ToDateTime(valores.CreatedAt).Month <= 3 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 3 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 3) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 3) && valores.StatusAluno == "Ativo")
                 {
                     somaMarco += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 4 && Convert.ToDateTime(valores.CreatedAt).Month <= 4 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 4 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 4) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 4) && valores.StatusAluno == "Ativo")
                 {
                     somaAbril += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 5 && Convert.ToDateTime(valores.CreatedAt).Month <= 5 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 5 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 5) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 5) && valores.StatusAluno == "Ativo")
                 {
                     somaMaio += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 6 && Convert.ToDateTime(valores.CreatedAt).Month <= 6 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 6 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 6) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 6) && valores.StatusAluno == "Ativo")
                 {
                     somaJunho += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 7 && Convert.ToDateTime(valores.CreatedAt).Month <= 7 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 7 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 7) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 7) && valores.StatusAluno == "Ativo")
                 {
                     somaJulho += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 8 && Convert.ToDateTime(valores.CreatedAt).Month <= 8 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 8 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 8) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 8) && valores.StatusAluno == "Ativo")
                 {
                     somaAgosto += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 9 && Convert.ToDateTime(valores.CreatedAt).Month <= 9 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 9 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 9) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear))  && Convert.ToDateTime(valores.CreatedAt).Month <= 9) && valores.StatusAluno == "Ativo")
                 {
                     somaSetembro += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 10 && Convert.ToDateTime(valores.CreatedAt).Month <= 10 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 10 && ( Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 10) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 10) && valores.StatusAluno == "Ativo")
                 {
                     somaOutubro += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 11 && Convert.ToDateTime(valores.CreatedAt).Month <= 11 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 11 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 11) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 11) && valores.StatusAluno == "Ativo")
                 {
                     somaNovembro += float.Parse(valores.ValorMensalidade);
                 }
 
-                if (Convert.ToDateTime(valores.VencimentoEm).Month >= 12 && Convert.ToDateTime(valores.CreatedAt).Month <= 12 && valores.StatusAluno == "Ativo")
+                if ((((Convert.ToDateTime(valores.VencimentoEm).Month >= 12 && (Convert.ToDateTime(valores.VencimentoEm).Year == currentYear)) || (Convert.ToDateTime(valores.VencimentoEm).Month < 12) && (Convert.ToDateTime(valores.VencimentoEm).Year > currentYear)) && Convert.ToDateTime(valores.CreatedAt).Month <= 12) && valores.StatusAluno == "Ativo")
                 {
                     somaDezembro += float.Parse(valores.ValorMensalidade);
                 }

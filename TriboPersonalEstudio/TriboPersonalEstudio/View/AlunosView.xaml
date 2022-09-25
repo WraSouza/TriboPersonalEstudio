@@ -50,7 +50,7 @@
                                         <StackLayout Orientation="Horizontal">
                                             <Label
                                             x:Name="lblNomeAluno"
-                                            FontFamily="OpenSansRegular"
+                                            FontFamily="OpenSansSemiBold"
                                             FontSize="20"
                                             Text="{Binding NomeAluno}"
                                             TextColor="OrangeRed" />
@@ -67,17 +67,17 @@
                                         </StackLayout>
 
                                         <StackLayout Orientation="Horizontal">
-                                            <Label TextColor="Black" Text="Contrato: " />
-                                            <Label TextColor="Gray" Text="{Binding PeriodoContrato}" />
+                                            <Label TextColor="Black" Text="Contrato: " FontSize="{OnPlatform UWP=20, Android=15}"/>
+                                            <Label TextColor="Gray" Text="{Binding PeriodoContrato}" FontSize="{OnPlatform UWP=20, Android=15}" />
                                         </StackLayout>
 
                                         <StackLayout Orientation="Horizontal">
                                             <Label
                                             TextColor="Black"
-                                            FontSize="13"
+                                            FontSize="{OnPlatform UWP=20, Android=15}"
                                             Text="Vence Em: " />
                                             <Label                                            
-                                            FontSize="13"
+                                            FontSize="{OnPlatform UWP=20, Android=15}"
                                             TextColor="Gray"
                                             Text="{Binding VencimentoEm}" />
                                         </StackLayout>                                    

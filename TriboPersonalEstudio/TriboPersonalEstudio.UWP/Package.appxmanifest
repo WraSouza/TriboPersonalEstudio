@@ -8,8 +8,8 @@
 
   <Identity
     Name="05AB7795-F317-43C4-8AEE-3F90E74A3E18"
-    Publisher="CN=8207D206-BB4A-4CCC-BFB1-B5EF4CD94774"
-    Version="1.0.0.0" />
+    Publisher="CN=wladimir.souza"
+    Version="1.0.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -32,11 +32,11 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="TriboPersonalEstudio.UWP.App">
       <uap:VisualElements
-        DisplayName="TriboPersonalEstudio.UWP"
+        DisplayName="Tribo Personal Estudio"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="TriboPersonalEstudio.UWP"
-        BackgroundColor="transparent">
+        BackgroundColor="white">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
