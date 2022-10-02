@@ -221,7 +221,7 @@ namespace TriboPersonalEstudio.ViewModel
                     IsBusy = true;
                     if (string.IsNullOrEmpty(NomeAluno))
                     {
-                        await Application.Current.MainPage.DisplayAlert("Erro", "Os Campos São Obrigatórios", "OK");
+                        Mensagem.MensagemCamposObrigatorios();
                     }
                     else
                     {
@@ -235,71 +235,79 @@ namespace TriboPersonalEstudio.ViewModel
                         }
                         else if (PrazoButton.ToString() == Trimestral)
                         {
-                            VencimentoEm = CreatedAt.AddDays(60);
+                            VencimentoEm = CreatedAt.AddDays(90);
                         }
                         else
                         {
-                            VencimentoEm = CreatedAt.AddDays(150);
-
+                            VencimentoEm = CreatedAt.AddDays(180);
                         }                        
                         
                         imagemURL = await StoreImages(caminhoPhoto);                        
 
                         referenciaImagem = imagemURL.ToString();                        
 
-                        var qtdeAlunos = userService.RetornaAlunos();
+                        var qtdeAlunos = userService.RetornaAlunos();   
+                        
+                        bool ispaid = await Mensagem.MensagemMesAtualPago();
 
-                        var ispaid = await Application.Current.MainPage.DisplayAlert("", "O Mês Atual Está Pago?", "Sim", "Não");
-
-                        if (ispaid)
-                        {
-                            var novoUsuario = new Usuario()
+                            if (ispaid)
                             {
-                                NomeAluno = NomeAluno,
-                                NomeUsuario = NomeUsuario,
-                                StatusAluno = isAtivo,
-                                CreatedAt = CreatedAt.Date.ToShortDateString(),
-                                IsProfessor = isProfessor,
-                                QtdeVezesSemana = QtdeVezesPorSemana,
-                                PeriodoContrato = PrazoButton,
-                                SenhaAluno = senhaPadrao,
-                                TipoPlano = PlanoButton,
-                                VencimentoEm = VencimentoEm.Date.ToShortDateString(),
-                                ValorMensalidade = ValorMensalidade,
-                                CaminhoImagem = referenciaImagem,
-                                IsPaymentUpdated = true,
-                                LastPaidMonth = DateTime.Today.Month.ToString()
+                                var novoUsuario = new Usuario()
+                                {
+                                    NomeAluno = NomeAluno,
+                                    NomeUsuario = NomeUsuario,
+                                    StatusAluno = isAtivo,
+                                    CreatedAt = CreatedAt.ToShortDateString(),
+                                    IsProfessor = isProfessor,
+                                    QtdeVezesSemana = QtdeVezesPorSemana,
+                                    PeriodoContrato = PrazoButton,
+                                    SenhaAluno = senhaPadrao,
+                                    TipoPlano = PlanoButton,
+                                    VencimentoEm = VencimentoEm.ToShortDateString(),
+                                    ValorMensalidade = ValorMensalidade,
+                                    CaminhoImagem = referenciaImagem,
+                                    IsPaymentUpdated = true,
+                                    CurrentMonth = DateTime.Today.Month.ToString(),
+                                    DataInicioPlano = CreatedAt.ToShortDateString()
 
-                            };
+                                };
 
-                            confirmaCadastro = await userService.CadastraAluno(novoUsuario);
-                        }
-                        else
-                        {
-                            int lastMonth = (DateTime.Today.Month);
+                                confirmaCadastro = await userService.CadastraAluno(novoUsuario);
 
-                            var novoUsuario = new Usuario()
+                                if (confirmaCadastro)
+                                {
+                                    Mensagem.MensagemCadastroComSucesso();
+                                }
+                            }
+                            else
                             {
-                                NomeAluno = NomeAluno,
-                                NomeUsuario = NomeUsuario,
-                                StatusAluno = isAtivo,
-                                CreatedAt = CreatedAt.Date.ToShortDateString(),
-                                IsProfessor = isProfessor,
-                                QtdeVezesSemana = QtdeVezesPorSemana,
-                                PeriodoContrato = PrazoButton,
-                                SenhaAluno = senhaPadrao,
-                                TipoPlano = PlanoButton,
-                                VencimentoEm = VencimentoEm.Date.ToShortDateString(),
-                                ValorMensalidade = ValorMensalidade,
-                                CaminhoImagem = referenciaImagem,
-                                IsPaymentUpdated = false,
-                                LastPaidMonth = lastMonth.ToString()
+                                var novoUsuario = new Usuario()
+                                {
+                                    NomeAluno = NomeAluno,
+                                    NomeUsuario = NomeUsuario,
+                                    StatusAluno = isAtivo,
+                                    CreatedAt = CreatedAt.ToShortDateString(),
+                                    IsProfessor = isProfessor,
+                                    QtdeVezesSemana = QtdeVezesPorSemana,
+                                    PeriodoContrato = PrazoButton,
+                                    SenhaAluno = senhaPadrao,
+                                    TipoPlano = PlanoButton,
+                                    VencimentoEm = VencimentoEm.Date.ToShortDateString(),
+                                    ValorMensalidade = ValorMensalidade,
+                                    CaminhoImagem = referenciaImagem,
+                                    IsPaymentUpdated = false,
+                                    CurrentMonth = DateTime.Today.Month.ToString(),
+                                    DataInicioPlano = CreatedAt.ToShortDateString()
 
-                            };
+                                };
 
-                            confirmaCadastro = await userService.CadastraAluno(novoUsuario);
-                        }
+                                confirmaCadastro = await userService.CadastraAluno(novoUsuario);
 
+                                if (confirmaCadastro)
+                                {
+                                    Mensagem.MensagemCadastroComSucesso();
+                                }
+                            }
 
                         int mesAtual = DateTime.Now.Month;
 
@@ -325,7 +333,7 @@ namespace TriboPersonalEstudio.ViewModel
                         {
                             if (ispaid)
                             {
-                                //TO Do, colocar <= depois.
+
                                 for (int i = CreatedAt.Month; i <= mesAtual; i++)
                                 {
                                     //Já cadastro o aluno na classe Mensalidade
@@ -343,7 +351,7 @@ namespace TriboPersonalEstudio.ViewModel
                             }
                             else
                             {
-                                //TO Do, colocar <= depois.
+
                                 for (int i = CreatedAt.Month; i < mesAtual; i++)
                                 {
                                     //Já cadastro o aluno na classe Mensalidade
@@ -360,26 +368,13 @@ namespace TriboPersonalEstudio.ViewModel
                                 }
                             }
 
-
-                        }
-
-
-                        if (confirmaCadastro)
-                        {
-                            await Application.Current.MainPage.DisplayAlert("Sucesso", "Usuário Cadastrado Com Sucesso", "OK");
-
-
-                        }
-                        else
-                        {
-                            await Application.Current.MainPage.DisplayAlert("Info", "Usuário Já Cadastrado No Sistema", "OK");
-                        }
+                        }                       
 
                     }
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Erro", "Não Foi Possível Verificar Credenciais. Verifique Sua Conexão de Internet.", "OK");
+                    Mensagem.MensagemErroConexao();
                 }
 
             }

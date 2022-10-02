@@ -54,17 +54,19 @@
                                             x:Name="lblNomeAluno"   
                                             FontSize="20"
                                             Text="{Binding NomeAluno}"
-                                            TextColor="Black" />
+                                            TextColor="OrangeRed" />
 
                                         </StackLayout>
 
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="Valor Mensalidade"
+                                            <Label Text="Valor Mensalidade: R$"
                                                    FontFamily="OpenSansSemiBold"
                                                    FontSize="15"
-                                                   TextColor="OrangeRed"/>
+                                                   TextColor="Gray"/>
 
-                                            <Label Text="{Binding ValorMensalidade}"/>
+                                            <Label Text="{Binding ValorMensalidade}"
+                                                   FontSize="15"
+                                                   FontFamily="OpenSansRegular"/>
 
                                         </StackLayout>
 
@@ -81,10 +83,10 @@
                                 </Grid>
 
                                 <Button Text="Confirmar"   
-                                            Command="{Binding Path=BindingContext.AlteraStatusMensalidadePago,
+                                        Command="{Binding Path=BindingContext.AlteraStatusMensalidadePago,
                                         Source={x:Reference collectionView}}" CommandParameter="{Binding .}"
-                                    FontSize="15"
-                                    Margin="35,25,35,0"/>
+                                        FontSize="15"
+                                        Margin="35,25,35,0"/>
 
 
                             </StackLayout>

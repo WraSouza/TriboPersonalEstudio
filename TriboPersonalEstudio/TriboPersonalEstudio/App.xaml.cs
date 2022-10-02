@@ -16,8 +16,8 @@ namespace TriboPersonalEstudio
 
             MainPage = new View.LoginView();
 
-            OneSignal.Default.Initialize("34ed7075-36eb-4a64-bf85-e5b20eb19e85");
-            OneSignal.Default.PromptForPushNotificationsWithUserResponse();
+            //OneSignal.Default.Initialize("34ed7075-36eb-4a64-bf85-e5b20eb19e85");
+            //OneSignal.Default.PromptForPushNotificationsWithUserResponse();
 
 
            // CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;

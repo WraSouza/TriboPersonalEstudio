@@ -48,7 +48,7 @@ namespace TriboPersonalEstudio.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Erro", "Verifique Sua Conexão de Internet.", "OK");
+                Mensagem.MensagemErroConexao();
 
                 IsRefreshing = false;
             }
@@ -71,7 +71,7 @@ namespace TriboPersonalEstudio.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Erro", "Verifique Sua Conexão de Internet.", "OK");
+                Mensagem.MensagemErroConexao();
             }
         }
     }

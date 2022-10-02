@@ -97,7 +97,7 @@ namespace TriboPersonalEstudio.ViewModel
                 {
                     if (String.IsNullOrEmpty(GrupoExercicios))
                     {
-                        await Application.Current.MainPage.DisplayAlert("Ops..", "O Campo Grupo de Exercícios Dev Ser Preenchido", "OK");
+                        Mensagem.MensagemCamposObrigatorios();
                     }
                     else
                     {
@@ -109,7 +109,7 @@ namespace TriboPersonalEstudio.ViewModel
 
                             if (confirmaCadastro)
                             {
-                                await Application.Current.MainPage.DisplayAlert("", "Cadastro Realizado Com Sucesso", "OK");
+                                Mensagem.MensagemCadastroComSucesso();
                             }
                         }
                         else
@@ -129,7 +129,7 @@ namespace TriboPersonalEstudio.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Erro", "Verifique Sua Conexão de Internet.", "OK");
+                Mensagem.MensagemErroConexao();
             }
         }
 

@@ -19,8 +19,13 @@ namespace TriboPersonalEstudio.ViewModel
         public Command IrParaAlunoDetailView { get; set; }
         public Command IrParaCadastroExerciciosAlunoView { get; set; }
         public Command AbrirCadastroAlunoView { get; set; }
+        public Command RenovarPlanoAlunoView { get; set; }
+        private readonly string Mensal = "Mensal";
+        private readonly string Trimestral = "Trimestral";
+        private DateTime VencimentoEm;
 
         readonly UserServices usuarios = new UserServices();
+        readonly MensalidadeServices mensalidade = new MensalidadeServices();
 
         public AlunosViewModel()
         {
@@ -30,6 +35,8 @@ namespace TriboPersonalEstudio.ViewModel
             AbrirCadastroAlunoView = new Command(async () => await AbrirCadastroAluno());
             IrParaAlunoDetailView = new Command<Usuario>((model) => AbrirAlunoDetailView(model));
             IrParaCadastroExerciciosAlunoView = new Command<Usuario>((model) => AbrirCadastroExercicioAlunoView(model));
+
+            RenovarPlanoAlunoView = new Command<Usuario>((model) => RenovarPlano(model));
         }
 
         bool isRefreshing;
@@ -41,6 +48,130 @@ namespace TriboPersonalEstudio.ViewModel
                 isRefreshing = value;
                 OnPropertyChanged(nameof(IsRefreshing));
             }
+        }
+
+        private async void RenovarPlano(Usuario model)
+        {
+            if (model is null)
+            {
+                return;
+            }
+
+            DateTime vencimento = Convert.ToDateTime(model.VencimentoEm);
+
+            if (model.PeriodoContrato.ToString() == Mensal)
+            {
+                VencimentoEm = vencimento.AddDays(30);
+
+            }
+            else if (model.PeriodoContrato.ToString() == Trimestral)
+            {
+                VencimentoEm = vencimento.AddDays(90);
+            }
+            else
+            {
+                VencimentoEm = vencimento.AddDays(180);
+
+            }
+
+            var renovaPlano = await Application.Current.MainPage.DisplayAlert("", "Renovar Plano?", "Sim", "Não");
+
+            bool verificaConexao = Conectividade.VerificaConectividade();
+
+            if (verificaConexao)
+            {                
+
+                if (renovaPlano)
+                {
+                    bool ispaid = await Mensagem.MensagemMesAtualPago();
+
+                    if (ispaid)
+                    { 
+                        
+                        if((vencimento.Month < DateTime.Today.Month) && (vencimento.Year == DateTime.Today.Year))
+                        {                            
+                            var novoUsuario = new Usuario()
+                            {
+                                NomeAluno = model.NomeAluno,
+                                DataInicioPlano = DateTime.Today.ToShortDateString(),
+                                StatusAluno = "Ativo",
+                                CurrentMonth = DateTime.Today.Month.ToString(),
+                                IsPaymentUpdated = true,
+                                VencimentoEm = VencimentoEm.ToShortDateString()
+                            };
+
+                            bool confirmaRenovacaoPlano = await usuarios.RenovarPlano(novoUsuario);
+
+                            if (confirmaRenovacaoPlano)
+                            {
+                                Mensagem.MensagemRenovacaoPlano();
+                            }
+
+                            var novoCadastroMensalidade = new Mensalidade()
+                            {
+                                NomeAluno = model.NomeAluno,
+                                CaminhoImagem = model.CaminhoImagem,
+                                Mes = DateTime.Today.Month.ToString(),
+                                IsPaid = true,
+                                ValorMensalidade = model.ValorMensalidade.ToString()
+
+                            };
+
+                            bool confirmaMensalidade = await mensalidade.CadastraAlunoMensalidade(novoCadastroMensalidade);
+                        }
+                        else
+                        {
+                            var usuario = new Usuario()
+                            {
+                                NomeAluno = model.NomeAluno,
+                                DataInicioPlano = model.VencimentoEm,
+                                StatusAluno = "Ativo",
+                                CurrentMonth = vencimento.Month.ToString(),
+                                IsPaymentUpdated = true,
+                                VencimentoEm = VencimentoEm.ToShortDateString()
+                            };
+
+                            bool confirmaRenovacao = await usuarios.RenovarPlano(usuario);
+
+                            if (confirmaRenovacao)
+                            {
+                                Mensagem.MensagemRenovacaoPlano();
+                            }
+                        }                        
+
+                        
+                    }
+                    else
+                    {
+                        int currentMonth = (DateTime.Today.Month);
+
+                        var usuario = new Usuario()
+                        {
+                            NomeAluno = model.NomeAluno,                           
+                            DataInicioPlano = model.VencimentoEm,
+                            StatusAluno = "Ativo",
+                            CurrentMonth = currentMonth.ToString(),
+                            IsPaymentUpdated = false,
+                            VencimentoEm = VencimentoEm.ToShortDateString()
+                        };
+
+                        bool confirmaRenovacao = await usuarios.RenovarPlano(usuario);
+
+                        if (confirmaRenovacao)
+                        {
+                            Mensagem.MensagemRenovacaoPlano();
+                        }
+
+                    }
+
+                }
+            }
+            else
+            {
+                Mensagem.MensagemErroConexao();
+            }
+
+           
         }
 
         private async void AbrirCadastroExercicioAlunoView(Usuario model)
@@ -128,7 +259,7 @@ namespace TriboPersonalEstudio.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Erro", "Verifique Sua Conexão de Internet.", "OK");
+                Mensagem.MensagemErroConexao();                
             }
         }
 

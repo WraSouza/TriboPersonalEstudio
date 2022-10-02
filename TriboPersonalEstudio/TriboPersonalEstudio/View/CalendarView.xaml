@@ -51,27 +51,29 @@
                                     CornerRadius="10">
 
 
-                                    <Grid Padding="0" ColumnSpacing="15" ColumnDefinitions="2*,2*,2*">
+                                    <Grid Padding="0" ColumnSpacing="15" ColumnDefinitions="2*,2*">
                                         <Frame
                                     
-                                    Padding="0"
-                                    CornerRadius="60"
-                                    HeightRequest="{OnPlatform UWP=130, Android=80, iOS=110}"
-                                    HorizontalOptions="Start"
-                                    IsClippedToBounds="True"
-                                    VerticalOptions="Center"
-                                    WidthRequest="{OnPlatform UWP=130, Android=80, iOS=110}">
+                                                Padding="0"
+                                                CornerRadius="60"
+                                                HeightRequest="{OnPlatform UWP=130, Android=80, iOS=110}"
+                                                HorizontalOptions="Start"
+                                                IsClippedToBounds="True"
+                                                VerticalOptions="Center"
+                                                WidthRequest="{OnPlatform UWP=130, Android=80, iOS=110}">
                                             <Image Aspect="Fill" Source="{Binding CaminhoImagem}" />
 
                                         </Frame>
 
                                         <StackLayout
-                                                HorizontalOptions="Center"
+                                                HorizontalOptions="CenterAndExpand"                       
+                                            
                                                  Grid.Row="0"
                                                 Grid.Column="1"
                                                 Grid.ColumnSpan="2">
 
-                                            <Label
+                                            <StackLayout>
+                                                <Label
                                             x:Name="lblNomeAluno"
                                             FontFamily="OpenSansSemiBold"
                                             VerticalOptions="StartAndExpand"
@@ -79,14 +81,28 @@
                                             Text="{Binding NomeAluno}"
                                             TextColor="OrangeRed" />
 
-                                            <Label Text="Grupos: "
+                                                <Label Text="Grupos: "
                                                    FontFamily="OpenSansSemiBold"
                                                    TextColor="OrangeRed"/>
-                                            
-                                            <Label Text="{Binding GrupoExercicio}"
-                                                   FontFamily="OpenSansSemiBold"/>
 
+                                                <Label Text="{Binding GrupoExercicio}"
+                                                   FontFamily="OpenSansMedium"/>
 
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="Horário: "
+                                                           FontFamily="OpenSansRegular"/>
+
+                                                    <Label Text="{Binding HoraInicial}"
+                                                           FontFamily="OpenSansRegular"/>
+
+                                                    <Label Text="-"/>
+
+                                                    <Label Text="{Binding HoraFinal}"
+                                                           FontFamily="OpenSansRegular"/>
+                                                </StackLayout>
+
+                                                
+                                            </StackLayout>
 
                                         </StackLayout>
 

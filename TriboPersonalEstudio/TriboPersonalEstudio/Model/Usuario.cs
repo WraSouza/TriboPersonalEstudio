@@ -12,6 +12,7 @@ namespace TriboPersonalEstudio.Model
         public bool IsProfessor { get; set; }
         public string StatusAluno { get; set; }
         public string CreatedAt { get; set; }
+        public string DataInicioPlano { get; set; }
         public string VencimentoEm { get; set; }
         public object TipoPlano { get; set; }
         public object QtdeVezesSemana { get; set; }
@@ -19,7 +20,7 @@ namespace TriboPersonalEstudio.Model
         public string ValorMensalidade { get; set; }
         public string CaminhoImagem { get; set; }
         public bool IsPaymentUpdated { get; set; }
-        public string LastPaidMonth { get; set; }
+        public string CurrentMonth { get; set; }
         public string AnoAtual { get; set; }
     }
 }

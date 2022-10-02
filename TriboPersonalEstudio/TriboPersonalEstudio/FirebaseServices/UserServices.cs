@@ -71,7 +71,8 @@ namespace TriboPersonalEstudio.FirebaseServices
                         ValorMensalidade = usuario.ValorMensalidade,
                         CaminhoImagem = usuario.CaminhoImagem,
                         IsPaymentUpdated = usuario.IsPaymentUpdated,
-                        LastPaidMonth = usuario.LastPaidMonth
+                        CurrentMonth = usuario.CurrentMonth,
+                        DataInicioPlano = usuario.DataInicioPlano
                     });
 
                 return true;
@@ -118,7 +119,7 @@ namespace TriboPersonalEstudio.FirebaseServices
                     CreatedAt = item.Object.CreatedAt,
                     StatusAluno = item.Object.StatusAluno,
                     IsPaymentUpdated = item.Object.IsPaymentUpdated,
-                    LastPaidMonth = item.Object.LastPaidMonth
+                    CurrentMonth = item.Object.CurrentMonth
 
                 }).ToList();
         }
@@ -156,7 +157,7 @@ namespace TriboPersonalEstudio.FirebaseServices
                                             .OnceAsync<Usuario>()).Where(a => DateTime.Parse(a.Object.VencimentoEm) < DateTime.Today).FirstOrDefault();
 
 
-                        toUpdatePerson.Object.StatusAluno = "Bloqueado";
+                        toUpdatePerson.Object.StatusAluno = "Inativo";
 
                         await firebase
                        .Child("Usuario")
@@ -224,7 +225,28 @@ namespace TriboPersonalEstudio.FirebaseServices
               .OnceAsync<Usuario>()).Where(a => a.Object.NomeAluno == nomeUsuario).FirstOrDefault();
 
             toUpdateUser.Object.IsPaymentUpdated = true;
-            toUpdateUser.Object.LastPaidMonth = DateTime.Today.Month.ToString();
+            toUpdateUser.Object.CurrentMonth = DateTime.Today.Month.ToString();
+
+            await firebase
+           .Child("Usuario")
+           .Child(toUpdateUser.Key)
+           .PutAsync(toUpdateUser.Object);
+
+            return true;
+        }
+
+        public async Task<bool> RenovarPlano(Usuario usuario)
+        {
+            var alunos = await RetornaAlunosAtivos();
+            var toUpdateUser = (await firebase
+              .Child("Usuario")
+              .OnceAsync<Usuario>()).Where(a => a.Object.NomeAluno == usuario.NomeAluno).FirstOrDefault();
+
+            toUpdateUser.Object.CreatedAt = usuario.CreatedAt;
+            toUpdateUser.Object.VencimentoEm = usuario.VencimentoEm;
+            toUpdateUser.Object.StatusAluno = "Ativo";
+            toUpdateUser.Object.IsPaymentUpdated = usuario.IsPaymentUpdated;
+            toUpdateUser.Object.CurrentMonth = usuario.CurrentMonth;
 
             await firebase
            .Child("Usuario")
@@ -244,7 +266,7 @@ namespace TriboPersonalEstudio.FirebaseServices
                 .OnceAsync<Usuario>();
 
             return alunos.Where(a => a.IsPaymentUpdated == false
-            && a.LastPaidMonth == DateTime.Today.Month.ToString() && a.IsProfessor == false && a.StatusAluno == "Ativo").ToList();
+            && a.CurrentMonth == DateTime.Today.Month.ToString() && a.IsProfessor == false && a.StatusAluno == "Ativo").ToList();
         }
 
         public async Task AlterarStatusAlunoMensalidadeNaoPaga()
@@ -255,22 +277,21 @@ namespace TriboPersonalEstudio.FirebaseServices
                 string ultimoMesPago = ((DateTime.Today.Month) - 1).ToString();
                 var toUpdateUser = (await firebase
                   .Child("Usuario")
-                  .OnceAsync<Usuario>()).Where(a => a.Object.LastPaidMonth == ultimoMesPago && a.Object.IsPaymentUpdated == true).FirstOrDefault();
+                  .OnceAsync<Usuario>()).Where(a => a.Object.CurrentMonth == ultimoMesPago && a.Object.IsPaymentUpdated == true).FirstOrDefault();
 
                 if(toUpdateUser != null)
                 {
                     toUpdateUser.Object.IsPaymentUpdated = false;
-                    toUpdateUser.Object.LastPaidMonth = DateTime.Today.Month.ToString();
+                    toUpdateUser.Object.CurrentMonth = DateTime.Today.Month.ToString();
 
 
                     await firebase
                    .Child("Usuario")
                    .Child(toUpdateUser.Key)
                    .PutAsync(toUpdateUser.Object);
-                }
-                
+                }              
 
-                //return true;
+                
             }
 
         }
